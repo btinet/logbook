@@ -1,0 +1,13 @@
+app_index:
+  expression: '/'
+  value:
+  controller: 'App\Controller\AppController'
+  method:     'index'
+  request:    'get'
+
+app_edit:
+  expression: '/user/([0-9]*)/edit'
+  value:      'id'
+  controller: 'App\Controller\AppController'
+  method: 'edit'
+  request: 'get'
