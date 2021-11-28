@@ -7,8 +7,10 @@
             <p>Deine ID lautet: {{ id }}</p>
         {% endif %}
         <a href="{{ route('user/4/edit') }}" class="btn btn-primary">Link zum Bearbeiten.</a>
-            {% for key, value in session.display %}
+        {% for user in user_all %}
+            {% for key, value in user %}
                 <p><b>{{ key }}:</b> {{ value }}</p>
             {% endfor %}
+        {% endfor %}
     </div>
 {% endblock %}

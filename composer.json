@@ -16,7 +16,8 @@
         "steampixel/simple-php-router": "^0.7.0",
         "mustangostang/spyc": "^0.6.3",
       "ext-json": "*",
-        "twig/twig": " 3.0"
+        "twig/twig": " 3.0",
+      "ext-pdo": "*"
     },
     "autoload": {
         "psr-4": {

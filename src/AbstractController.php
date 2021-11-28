@@ -3,9 +3,11 @@
 namespace App;
 
 
-
 use App\Extension\Twig\TwigExtension;
+use App\Service\EntityManagerService;
+use App\Service\EntityRepositoryService;
 use Exception;
+use ReflectionClass;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -50,5 +52,23 @@ abstract class AbstractController
         } catch (Exception $e) {
             return 'Template nicht gefunden, oder so.';
         }
+    }
+
+    public function getEntityManager(): EntityManagerService
+    {
+        return new EntityManagerService();
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    public function getRepository($entity_class){
+        $entity = new ReflectionClass($entity_class);
+        $repository = 'App\Repository\\'.$entity->getShortName().'Repository';
+
+        if(class_exists($repository)){
+            return new $repository($entity);
+        }
+        return false;
     }
 }
