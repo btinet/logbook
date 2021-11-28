@@ -16,10 +16,14 @@ abstract class AbstractController
      * @var Environment
      */
     protected Environment $view;
+    public Session $session;
 
     function __construct(){
 
-        $debug = true;
+        $debug = ($_ENV['APP_ENV'] === 'development') ? true : false;
+
+        $this->session = new Session();
+        $this->session->init();
 
         $loader = new FilesystemLoader(project_root.'/templates');
         $this->view = new Environment($loader, [
@@ -31,14 +35,16 @@ abstract class AbstractController
             $this->view->addExtension(new \Twig\Extension\DebugExtension());
         }
         $this->view->addExtension(new TwigExtension());
+        $this->view->addGlobal('session',$this->session);
     }
 
     /**
      * @param $template
      * @param array $options
+     * @return string
      */
-    public function render($template, Array $options = [] ){
-
+    public function render($template, Array $options = [] ): string
+    {
         try {
             return $this->view->render($template, $options);
         } catch (Exception $e) {

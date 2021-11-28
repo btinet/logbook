@@ -141,6 +141,7 @@ $columns:   12;
   -webkit-tap-highlight-color: transparent;
 }
 
+
 // HTML tags
 // General
 *, ::after, ::before{
@@ -220,6 +221,10 @@ textarea{
   @include padding-x($input-padding-x*2,$input-padding-x*2);
   @include padding-y($input-padding-y,$input-padding-y);
   @include transition-all;
+}
+
+a.btn{
+  text-decoration: none;
 }
 
 .btn-{
@@ -661,6 +666,16 @@ $flex-aligns: start end baseline center stretch;
       &-content-#{$i} > * {
         @include padding-bottom($space*$i);
       }
+    }
+  }
+}
+
+.navbar{
+  ul.navbar-nav{
+    @include margin-y(0,0);
+    @include padding-x(0,0);
+    > li{
+      display: inline-block;
     }
   }
 }

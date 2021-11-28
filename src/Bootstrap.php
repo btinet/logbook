@@ -10,13 +10,18 @@ use Steampixel\Route;
 
 class Bootstrap
 {
-    public Route $routing;
-    public array $routes;
+    private Route $routing;
+    private array $routes;
 
     public function __construct()
     {
         $this->routing = new Route();
         $this->routes = Spyc::YAMLLoad(project_root.'/config/routes.yaml');
+        $env = Spyc::YAMLLoad(project_root.'/config/env.yaml');
+        foreach ($env as $key => $value)
+        {
+            $_ENV[$key] = $value;
+        }
     }
 
     /**

@@ -1,12 +1,11 @@
 <html lang="de">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Logbuch App</title>
+    <link rel="stylesheet" href="{{ link('styles/app.css') }}">
 </head>
 <body>
-    <h1>Hallo</h1>
-    {% if id %}
-        <p>Deine ID lautet: {{ id }}</p>
-    {% endif %}
-    <a href="{{ route('user/4/edit') }}">Link zum Bearbeiten.</a>
+    {% block body %}{% endblock %}
 </body>
 </html>

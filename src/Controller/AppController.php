@@ -7,19 +7,23 @@ use App\AbstractController;
 class AppController extends AbstractController
 {
 
-
     /**
-     * @param false $id
      * @return string
      */
-    public function index(bool $id = false): string
+    public function index(): string
     {
-        return $this->render('base.html.twig');
+        return $this->render('app/index.html.twig');
     }
 
-    public function edit($id = false): string
+    /**
+     * @param int|null $id
+     * @return string
+     */
+    public function edit(int $id = null): string
     {
-        return $this->render('base.html.twig',[
+        $this->session->set('username','Ben');
+
+        return $this->render('app/index.html.twig',[
             'id' => $id
         ]);
     }

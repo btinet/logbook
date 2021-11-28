@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block navigation %}
+        <section id="navigation" class="bg-dark">
+            <div class="container">
+                <nav class="navbar d-flex justify-content-space-between">
+                    <ul class="navbar-nav">
+                        <li><a href="{{ route('') }}" class="btn btn-dark py-2">Klassenbuch</a></li>
+                        <li><a href="{{ route('') }}" class="btn btn-dark py-2">Noten</a></li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li><a href="{{ route('') }}" class="btn btn-dark py-2">Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </section>
+    {% endblock %}
+    {% block content %}{% endblock %}
+{% endblock %}

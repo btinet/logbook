@@ -1,0 +1,14 @@
+{% extends 'app.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Hallo</h1>
+        {% if id %}
+            <p>Deine ID lautet: {{ id }}</p>
+        {% endif %}
+        <a href="{{ route('user/4/edit') }}" class="btn btn-primary">Link zum Bearbeiten.</a>
+            {% for key, value in session.display %}
+                <p><b>{{ key }}:</b> {{ value }}</p>
+            {% endfor %}
+    </div>
+{% endblock %}
