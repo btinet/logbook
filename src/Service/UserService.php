@@ -1,83 +1,55 @@
 <?php
 
-
 namespace App\Service;
 
-
-/**
- * Class User
- * @package Btinet\Ringhorn
- */
 class UserService
 {
-
-    /**
-     * @var PasswordService
-     */
-    public PasswordService $password;
-
-    /**
-     * User constructor.
-     */
-    function __construct(){
-        $this->password = new PasswordService();
-    }
-
-    /**
-     * @param $user         // User-Objekt, dass die Datenbanktabelle widerspiegelt
-     * @param $repository   // Model-Repository, das die Methoden zum Abrufen enthält
-     * @param array $data   // Formulardaten, die per POST übergeben worden sind
-     * @return int|mixed    // Gibt entweder Fehlercode oder das User-Objekt zurück
-     */
-    public function validate($user, $repository, array $data)
+    public static function tryLogin($repository, array $data): int
     {
-        if(0 != ($usernameLastError = $this->isString('username',$data,21031))) return $usernameLastError;
-        if(0 != ($usernameLastError = $this->isUnique($repository,'username',$data,21011))) return $usernameLastError;
-        if(0 != ($emailLastError = $this->isUnique($repository,'email',$data,21012))) return $emailLastError;
-        if(0 != ($emailLastError = $this->isEmail('email',$data,21022))) return $emailLastError;
-        if(0 != ($passwordLastError = $this->password->validate($data['password']))) return $passwordLastError;
-        if(0 != ($firstnameLastError = $this->isString('firstname',$data,21034))) return $firstnameLastError;
-        if(0 != ($lastnameLastError = $this->isString('lastname',$data,21035))) return $lastnameLastError;
+        if(0 != $usernameLastError = self::isString('username',$data,21031)) return $usernameLastError;
+        if(null === $usernameLastError = $repository->findOneBy(['username' => $data['username']])) return 210111;
+        if(0 != $userLastError = self::isMatch($repository,$data)) return $userLastError;
 
-        $user->setUsername($data['username']);
-        $user->setEmail($data['email']);
-        $user->setPassword($this->password->hash($data['password']));
-        $user->setFirstname($data['firstname']);
-        $user->setLastname($data['lastname']);
-        $user->setIsActive(1);
-        $user->setISBlocked(0);
-
-        return $user;
+        return 0;
     }
 
-    /**
-     * @param $repository
-     * @param $needle
-     * @param $array
-     * @param int $errorCode
-     * @return int
-     */
-    protected function isUnique($repository, $needle, $array, int $errorCode = 2101){
+    public static function validate($repository, array $data): int
+    {
+        if(0 != $usernameLastError = self::isString('username',$data,21031)) return $usernameLastError;
+        if(0 != $usernameLastError = self::isUnique($repository,'username',$data,21011)) return $usernameLastError;
+        if(0 != $emailLastError = self::isUnique($repository,'email',$data,21012)) return $emailLastError;
+        if(0 != $passwordLastError = PasswordService::validate($data['password'])) return $passwordLastError;
+        if(0 != $emailLastError = self::isEmail('email',$data,21022)) return $emailLastError;
+        if(0 != $firstnameLastError = self::isString('firstname',$data,21034)) return $firstnameLastError;
+        if(0 != $lastnameLastError = self::isString('lastname',$data,21035)) return $lastnameLastError;
+
+        return 0;
+    }
+
+    public static function isUnique($repository, $needle, $array, $errorCode = 2101): int
+    {
         return ($repository->findOneBy([$needle => $array[$needle]])) ? $errorCode : 0;
     }
 
-    /**
-     * @param $needle
-     * @param $array
-     * @param int $errorCode
-     * @return int
-     */
-    protected function isEmail($needle, $array, int $errorCode = 2102){
+    public static function isMatch($repository,$array, $errorCode = 210112): int
+    {
+        $user = ($repository->findOneBy([
+            'username' => $array['username'],
+        ]));
+        if($user){
+            $password = is_array($array['password']) ? array_pop($array['password']): $array['password'];
+            return !PasswordService::verify($password,$user['password']) ? $errorCode : 0;
+        }
+        return $errorCode;
+    }
+
+    public static function isEmail($needle, $array, $errorCode = 2102): int
+    {
         return (!filter_var($array[$needle], FILTER_VALIDATE_EMAIL)) ? $errorCode : 0;
     }
 
-    /**
-     * @param $needle
-     * @param $array
-     * @param int $errorCode
-     * @return int
-     */
-    protected function isString($needle, $array, int $errorCode = 2103){
+    public static function isString($needle, $array, $errorCode = 2103): int
+    {
         return (!is_string($array[$needle])) ? $errorCode : 0;
     }
 

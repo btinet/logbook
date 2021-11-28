@@ -2,109 +2,70 @@
 
 namespace App\Service;
 
-/**
- * Class Password
- * @package Btinet\Ringhorn
- */
 class PasswordService
 {
-
-    /**
-     * @param $plain_password
-     * @return false|string|null
-     */
-    public function hash($plain_password)
+    public static function hash($passwordPlain):string
     {
-        $plain_password = (is_array($plain_password)) ? array_pop($plain_password) : $plain_password;
-        return password_hash($plain_password, PASSWORD_DEFAULT);
+        return password_hash($passwordPlain, PASSWORD_DEFAULT);
     }
 
-    /**
-     * @param string $plain_password
-     * @param string $correct_hash
-     * @return bool
-     */
-    public function verify(string $plain_password, string $correct_hash): bool
+    public static function verify(string $plain_password, string $correct_hash): bool
     {
         return password_verify($plain_password, $correct_hash);
     }
 
-    /**
-     * @param array $password
-     * @return int
-     */
-    public function validate(array $password):int
+    public static function validate(array $password):int
     {
-        if(!$this->isString($password))     return 1601;    // kein String
-        if(!$this->isEqual($password))      return 1602;    // stimmt nicht überein
-        if(!$this->hasMinLength($password)) return 1603;    // ist nicht lang genug
-        if(!$this->isAllowed($password))    return 1604;    // verwendet nicht erlaubte Zeichen
-        if(!$this->isComplex($password))    return 1605;    // ist nicht komplex genug
+        if(!self::isString($password))                          return 1601;    // kein String
+        if(!self::isEqual($password))                           return 1602;    // stimmt nicht überein
+        if(!self::hasMinLength($password))                      return 1603;    // ist nicht lang genug
+        if(!self::isAllowed($password))                         return 1604;    // verwendet nicht erlaubte Zeichen
+        if(0 != $isComplexLastError = self::isComplex($password)) return $isComplexLastError; // ist nicht komplex genug
         return 0; // alles in Ordnung
     }
 
-    /**
-     * @param $password
-     * @return bool
-     */
-    private function isString($password): bool
+    private static function isString($password): bool
     {
-        if(is_array($password)){
+        if(is_array($password) && !empty($password)){
+            $passwordIsString = true;
             foreach ($password as $item){
-                $passwordIsString = (is_string($item)) ?? false;
+                if(!is_string($item)) return false;
             }
-            return ($passwordIsString) ?? false;
+            return $passwordIsString;
         } else {
-            return (is_string($password)) ?? false;
+            return is_string($password);
         }
     }
 
-    /**
-     * @param array $password
-     * @return bool
-     */
-    private function isEqual(array $password): bool
+    private static function isEqual(array $password): bool
     {
-        return ($password[0] == $password[1]) ?? false;
+        return ($password[0] === $password[1]);
     }
 
-    /**
-     * @param $password
-     * @return bool
-     */
-    private function hasMinLength($password): bool
+    private static function hasMinLength($password): bool
     {
-        $password = (is_array($password)) ? array_pop($password) : $password;
-        return (strlen($password) > 7) ?? false;
+        $password = is_array($password) && !empty($password) ? array_shift($password) : $password;
+        return strlen($password) >= 8;
     }
 
-    /**
-     * @param $password
-     * @return bool
-     */
-    private function isAllowed($password): bool
+    private static function isAllowed($password): bool
     {
         // TODO: auf erlaubte Zeichen prüfen
         return true;
     }
 
-    /**
-     * @param $password
-     * @return bool
-     */
-    private function isComplex($password): bool
+    private static function isComplex($password): int
     {
-        $password = (is_array($password)) ? array_pop($password) : $password;
-
-        /** Das Passwort muss mindestens
-         * - einen Kleinbuchstaben,
-         * - einen Großbuchstaben,
-         * - eine Ziffer und
-         * - ein Sonderzeichen @#-_$%^&+=§!?
-         * enthalten.
-         * Das Passwort muss zwischen 8 und 20 Zeichen lang sein.
-         */
-        return (bool)preg_match('/^(?=.*\d)(?=.*[@#\-_$%^&+=§!?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!?]{8,20}$/', $password);
+        $password = is_array($password) && !empty($password) ? array_shift($password) : $password;
+        $spaceCount = mb_strlen($password) - mb_strlen(mb_ereg_replace("\p{Zs}","",$password));
+        if ($spaceCount != 0){
+            $p = ($spaceCount/mb_strlen($password)*100);
+            if (!$p < 15) return 16051;
+        }
+        if (!mb_ereg("\p{Lu}",$password)) return 16052;
+        if (!mb_ereg("\p{Ll}",$password)) return 16053;
+        // if (!mb_ereg("\p{Lo}",$password)) return 16054;
+        if (!mb_ereg("\p{Nd}",$password)) return 16055;
+        return 0;
     }
-
 }

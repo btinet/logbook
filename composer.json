@@ -17,7 +17,8 @@
         "mustangostang/spyc": "^0.6.3",
       "ext-json": "*",
         "twig/twig": " 3.0",
-      "ext-pdo": "*"
+      "ext-pdo": "*",
+      "ext-mbstring": "*"
     },
     "autoload": {
         "psr-4": {
