@@ -2,18 +2,26 @@
 
 namespace App\Controller;
 
-class AppController
+use App\AbstractController;
+
+class AppController extends AbstractController
 {
 
 
-    public function index($id = false): string
+    /**
+     * @param false $id
+     * @return string
+     */
+    public function index(bool $id = false): string
     {
-        return 'index Seite';
+        return $this->render('base.html.twig');
     }
 
     public function edit($id = false): string
     {
-        return 'Bearbeiten Seite '.$id;
+        return $this->render('base.html.twig',[
+            'id' => $id
+        ]);
     }
 
 }

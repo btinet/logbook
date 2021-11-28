@@ -1,0 +1,690 @@
+// Colors
+$blue:      rgb(0,122,255);
+$brown:     rgb(162,132,94);
+$cyan:      rgb(50,173,230);
+$green:     rgb(52,199,89);
+$indigo:    rgb(88,86,214);
+$mint:      rgb(0,199,190);
+$orange:    rgb(255,149,0);
+$pink:      rgb(255,45,85);
+$purple:    rgb(175,82,222);
+$red:       rgb(255,59,48);
+$teal:      rgb(48,176,199);
+$yellow:    rgb(255,204,0);
+
+$black:     rgb(54,54,58);
+$gray-900:  rgb(76,76,64);
+$gray-700:  rgb(98,98,92);
+$gray-500:  rgb(112,112,108);
+$gray-300:  rgb(156,156,148);
+$gray-100:  rgb(198,198,186);
+$white:     rgb(245,245,239);
+
+
+$theme-colors:(
+        "primary":    $blue,
+        "secondary":  $gray-300,
+        "success":    $green,
+        "warning":    $yellow,
+        "danger":     $red,
+        "info":       $teal,
+        "dark":       $gray-900,
+        "light":      $gray-100,
+        "white":      $white,
+);
+
+// Fonts
+
+$font-family-sans: "Arial",sans-serif;
+$font-size-base:  1rem;
+$font-weight-base: 500;
+$headings-font-family: "New York",sans-serif;
+$headings-font-weight: $font-weight-base + 200;
+$headings-font-size-base: $font-size-base*3;
+$line-height: 1.25rem;
+$letter-spacing: -.125pt;
+$body-color: $black;
+$body-bg: $white;
+
+// Variables
+$space: .5rem;
+$border:  1px;
+
+$border-color: $gray-900;
+$border-radius: .25rem;
+$padding-x: $space;
+$padding-y: $space;
+
+// Input
+$input-border: $border;
+$input-border-color: $gray-100;
+$input-bg: $gray-100;
+$input-border-radius: none;
+$input-padding-x: .45rem;
+$input-padding-y: .45rem;
+$input-box-shadow: none;
+
+$breakpoints:(
+        "xs"  : 470px,
+        "s"   : 576px,
+        "m"   : 840px,
+        "l"   : 1080px,
+);
+
+$display-styles: inline-block inline block flex;
+$known-prefixes: webkit, moz, ms, o;
+
+$columns:   12;
+
+// Mixins
+@mixin prefix($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if not index($known-prefixes, $prefix) {
+      @warn "Unknown prefix #{$prefix}.";
+    }
+
+    -#{$prefix}-#{$property}: $value;
+  }
+  #{$property}: $value;
+}
+// Fonts
+@mixin font-weight($amount){
+  font-weight: $amount;
+}
+
+// Margin
+@mixin margin-left($value) {
+  margin-left: $value;
+}
+@mixin margin-right($value) {
+  margin-right: $value;
+}
+@mixin margin-top($value) {
+  margin-top: $value;
+}
+@mixin margin-bottom($value) {
+  margin-bottom: $value;
+}
+@mixin margin-x($width-left, $width-right) {
+  @include margin-left($width-left);
+  @include margin-right($width-right);
+}
+@mixin margin-y($width-top, $width-bottom) {
+  @include margin-top($width-top);
+  @include margin-bottom($width-bottom);
+}
+
+// Padding
+@mixin padding-left($value) {
+  padding-left: $value;
+}
+@mixin padding-right($value) {
+  padding-right: $value;
+}
+@mixin padding-top($value) {
+  padding-top: $value;
+}
+@mixin padding-bottom($value) {
+  padding-bottom: $value;
+}
+@mixin padding-x($padding-left, $padding-right) {
+  @include padding-left($padding-left);
+  @include padding-right($padding-right);
+}
+@mixin padding-y($padding-top, $padding-bottom) {
+  @include padding-top($padding-top);
+  @include padding-bottom($padding-bottom);
+}
+@mixin transition-all(){
+  -webkit-transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+// HTML tags
+// General
+*, ::after, ::before{
+  box-sizing: border-box;
+  outline: none;
+}
+html{
+  -webkit-text-size-adjust: 100%;
+}
+body{
+  @include margin-x(0,0);
+  @include margin-y(0,5rem);
+  font-family: $font-family-sans;
+  font-size: $font-size-base;
+  @include font-weight($font-weight-base);
+  letter-spacing: $letter-spacing;
+  color: $body-color;
+  background-color: $body-bg;
+}
+.container{
+  display: block;
+  @include margin-x(auto,auto);
+  @include padding-x(1.5rem,1.5rem);
+}
+// Forms
+form{
+  display: block;
+  width: inherit;
+}
+
+label{
+  display: none;
+}
+
+.input{
+  display: block;
+  width: 100%;
+  box-shadow: $input-box-shadow;
+  background-color: lighten($input-bg,20);
+  color: $gray-900;
+  font-family: $font-family-sans;
+  font-size: .9rem;
+  border-radius: $input-border-radius;
+  border: $input-border solid $input-border-color;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  @include padding-x($input-padding-x*2,$input-padding-x*2);
+  @include padding-y($input-padding-y,$input-padding-y);
+  @include transition-all;
+  &:hover{
+    border-color: darken($input-border-color,15);
+  }
+  &:focus{
+    border-color: darken($input-border-color,15);
+  }
+}
+
+textarea{
+  height: 200px;
+  min-height: 200px;
+  max-height: 200px;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  overflow-y: scroll;
+}
+
+.btn{
+  display: inline-block;
+  box-shadow: none;
+  font-family: $font-family-sans;
+  font-size: .9rem;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  @include padding-x($input-padding-x*2,$input-padding-x*2);
+  @include padding-y($input-padding-y,$input-padding-y);
+  @include transition-all;
+}
+
+.btn-{
+  @each $name, $value in $theme-colors {
+    &#{$name}{
+      background-color: $value;
+      color: $white;
+      &:hover{
+        background-color: darken($value,5);
+      }
+      &:active{
+        background-color: darken($value,10);
+      }
+    }
+  }
+}
+
+.disabled{
+  background-color: lighten($gray-100,5)!important;
+  color: $gray-300!important;
+  cursor: not-allowed!important;
+}
+
+
+// Grid System
+@media (max-width: map-get($breakpoints,"xs")) {
+  .container{
+    max-width: map-get($breakpoints,"xs")!important;
+    @include margin-x(0,0);
+  }
+
+    @for $i from 1 through $columns {
+      .row-#{$i} {
+        grid-template-columns: repeat($i, 1fr);
+      }
+    }
+
+}
+@media (min-width: map-get($breakpoints,"xs")) {
+  .container{
+    max-width: map-get($breakpoints,"xs")!important;
+  }
+
+    @for $i from 1 through $columns {
+      .row-sm-#{$i} {
+        grid-template-columns: repeat($i, 1fr);
+      }
+    }
+
+}
+
+@media (min-width: map-get($breakpoints,"s")) {
+  .container{
+    max-width: map-get($breakpoints,"s")!important;
+  }
+
+    @for $i from 1 through $columns {
+      .row-md-#{$i} {
+        grid-template-columns: repeat($i, 1fr);
+      }
+    }
+
+}
+@media (min-width: map-get($breakpoints,"m")) {
+  .container{
+    max-width: map-get($breakpoints,"m")!important;
+  }
+
+    @for $i from 1 through $columns {
+      .row-lg-#{$i} {
+        grid-template-columns: repeat($i, 1fr);
+      }
+    }
+
+}
+@media (min-width: map-get($breakpoints,"l")) {
+  .container{
+    max-width: map-get($breakpoints,"l")!important;
+  }
+
+    @for $i from 1 through $columns {
+      .row-xl-#{$i} {
+        grid-template-columns: repeat($i, 1fr);
+      }
+    }
+
+}
+.row{
+  @include margin-top($space*3);
+  display: grid;
+  grid-gap: 1rem;
+}
+
+.col{
+  display: inline-block;
+  align-content: end;
+}
+
+
+// Typography
+// Headings
+@for $i from 1 through 6 {
+  h#{$i} {
+    font-family: $headings-font-family;
+    font-weight: $font-weight-base+200;
+    font-size: $headings-font-size-base - $i*$font-size-base / 3;
+    @include margin-y(2rem,0);
+    @include font-weight($headings-font-weight);
+    @if($i == 1){
+      &:after{
+        display: block;
+        height: 1px;
+        width: 100%;
+        background-color: $gray-300;
+        @include margin-top(1rem);
+        content: "";
+      }
+    }
+  }
+}
+// Paragraph
+$alignments: start center end;
+p{
+  line-height: $line-height;
+  @include margin-y(1.5rem,0);
+  &.lead{
+    font-size: larger;
+    @include font-weight($headings-font-weight);
+  }
+}
+.text-muted{
+  color: $gray-300;
+}
+.text-emphasised{
+  font-weight: 700;
+}
+.text-italic{
+  font-style: italic;
+}
+.text{
+  @each $name, $value in $theme-colors {
+    &-#{$name} {
+      color: $value;
+    }
+  }
+  @each $value in $alignments {
+    &-#{$value} {
+      @include prefix(text-align,$value,moz ms o);
+    }
+  }
+
+}
+.small{
+  font-size: small;
+}
+.large{
+  font-size: large;
+}
+
+// Backgrounds
+@each $name, $value in $theme-colors {
+  .bg-#{$name} {
+    background-color: $value;
+  }
+}
+
+// Table
+.table, {
+  width: 100%;
+  vertical-align: top;
+  caption-side: bottom;
+  border-collapse: collapse;
+  border-spacing: 2px;
+  border-color: $gray-500;
+  > thead {
+    vertical-align: bottom;
+  }
+
+  > tbody {
+    vertical-align: inherit;
+  }
+  >caption{
+    font-size: small;
+    color: $gray-300;
+  }
+  tbody, td, tfoot, th, thead, tr {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+    text-align: left;
+  }
+  thead{
+    border-bottom: $border solid $gray-100;
+  }
+  tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+    :not(:last-child) > * {
+      border-bottom: $border solid lighten($gray-100,10);
+    }
+  }
+  td {
+    display: table-cell;
+    vertical-align: inherit;
+  }
+
+  td,th{
+    @include padding-x($space,$space);
+    @include padding-y($space,$space);
+  }
+}
+
+
+// Utilities
+// Display
+.d-{
+  @each $display-style in $display-styles{
+    &#{$display-style}{
+      @include prefix(display, $display-style, o ms moz);
+    }
+  }
+}
+
+.flex-row{
+  @include prefix(flex-direction,row,$known-prefixes);
+}
+.flex-column{
+  @include prefix(flex-direction,column,$known-prefixes);
+}
+.flex-grow-1{
+  flex-grow: 1;
+}
+.flex-grow-0{
+  flex-grow: 0;
+}
+.flex-shrink-1{
+  flex-shrink: 1;
+}
+.flex-shrink-0{
+  flex-shrink: 0;
+}
+$flex-justifies: start space-around center space-between space-evenly end;
+$flex-aligns: start end baseline center stretch;
+
+@each $flex-justify in $flex-justifies {
+  .justify-content-#{$flex-justify} {
+    @include prefix(justify-content, $flex-justify, $known-prefixes);
+  }
+}
+@each $flex-align in $flex-aligns {
+  .align-items-#{$flex-align}{
+    @include prefix(align-items, $flex-align, $known-prefixes);
+  }
+}
+
+.h-100{
+  height: 100%;
+}
+
+// Margin
+.m{
+  &x-{
+    &auto{
+      @include margin-x(auto,auto);
+    }
+    @for $i from 0 through 5 {
+      &#{$i},&#{$i}{
+        @include margin-x($space * $i,$space * $i);
+      }
+    }
+    @for $i from 0 through 5 {
+      &content-#{$i} > * {
+        @include margin-x($space * $i,$space * $i);
+      }
+    }
+  }
+  &y-{
+    &auto{
+      @include margin-y(auto,auto);
+    }
+    @for $i from 0 through 5 {
+      &#{$i} {
+        @include margin-y($space * $i,$space * $i);
+      }
+    }
+    @for $i from 0 through 5 {
+      &content-#{$i} > * {
+        @include margin-y($space * $i,$space * $i);
+      }
+    }
+  }
+  &-auto{
+    @include margin-x(auto,auto);
+    @include margin-y(auto,auto);
+  }
+  @for $i from 0 through 5 {
+    &-#{$i} {
+      @include margin-x($space * $i,$space * $i);
+      @include margin-y($space * $i,$space * $i);
+    }
+  }
+  @for $i from 0 through 5 {
+    &-content-#{$i} > * {
+      @include margin-x($space * $i,$space * $i);
+      @include margin-y($space * $i,$space * $i);
+    }
+  }
+  &s{
+    @for $i from 0 through 5 {
+      &-#{$i} {
+        @include margin-left($space*$i);
+      }
+    }
+    @for $i from 0 through 5 {
+      &-content-#{$i} > * {
+        @include margin-left($space*$i);
+      }
+    }
+  }
+  &e{
+    @for $i from 0 through 5 {
+      &-#{$i} {
+        @include margin-right($space*$i);
+      }
+    }
+    @for $i from 0 through 5 {
+      &-content-#{$i} > * {
+        @include margin-right($space*$i);
+      }
+    }
+  }
+  &t{
+    @for $i from 0 through 5 {
+      &-#{$i} {
+        @include margin-top($space*$i);
+      }
+    }
+    @for $i from 0 through 5 {
+      &-content-#{$i} > * {
+        @include margin-top($space*$i);
+      }
+    }
+  }
+  &b{
+    @for $i from 0 through 5 {
+      &-#{$i} {
+        @include margin-bottom($space*$i);
+      }
+    }
+    @for $i from 0 through 5 {
+      &-content-#{$i} > * {
+        @include margin-bottom($space*$i);
+      }
+    }
+  }
+}
+// Padding
+.p{
+  &x-{
+    @for $i from 0 through 5 {
+      &#{$i} {
+        @include padding-x($space * $i,$space * $i);
+      }
+    }
+    @for $i from 0 through 5 {
+      &content-#{$i} > * {
+        @include padding-x($space * $i,$space * $i);
+      }
+    }
+  }
+  &y-{
+    @for $i from 0 through 5 {
+      &#{$i} {
+        @include padding-y($space * $i,$space * $i);
+      }
+    }
+    @for $i from 0 through 5 {
+      &content-#{$i} > * {
+        @include padding-y($space * $i,$space * $i);
+      }
+    }
+  }
+  @for $i from 0 through 5 {
+    &-#{$i} {
+      @include padding-x($space * $i,$space * $i);
+      @include padding-y($space * $i,$space * $i);
+    }
+  }
+  @for $i from 0 through 5 {
+    &-content-#{$i} > * {
+      @include padding-x($space * $i,$space * $i);
+      @include padding-y($space * $i,$space * $i);
+    }
+  }
+  &s{
+    @for $i from 0 through 5 {
+      &-#{$i} {
+        @include padding-left($space*$i);
+      }
+    }
+    @for $i from 0 through 5 {
+      &-content-#{$i} > * {
+        @include padding-left($space*$i);
+      }
+    }
+  }
+  &e{
+    @for $i from 0 through 5 {
+      &-#{$i} {
+        @include padding-right($space*$i);
+      }
+    }
+    @for $i from 0 through 5 {
+      &-content-#{$i} > * {
+        @include padding-right($space*$i);
+      }
+    }
+  }
+  &t{
+    @for $i from 0 through 5 {
+      &-#{$i} {
+        @include padding-top($space*$i);
+      }
+    }
+    @for $i from 0 through 5 {
+      &-content-#{$i} > * {
+        @include padding-top($space*$i);
+      }
+    }
+  }
+  &b{
+    @for $i from 0 through 5 {
+      &-#{$i} {
+        @include padding-bottom($space*$i);
+      }
+    }
+    @for $i from 0 through 5 {
+      &-content-#{$i} > * {
+        @include padding-bottom($space*$i);
+      }
+    }
+  }
+}
+
+#table-1{
+  background-color: lighten($gray-100,15%);
+}
+#table-1 > tbody > tr:nth-child(odd){
+  background-color: lighten($gray-100,18%);
+}
+
+#table-2{
+  background-color: lighten($blue,15%);
+  color: $white;
+}
+#table-2 > tbody > tr:nth-child(odd){
+  background-color: lighten($blue,18%);
+}
+
+table:not(.table){
+  background-color: lighten($gray-100,10%);
+  border: 1px solid $gray-500;
+  th{
+    text-align: left;
+  }
+}

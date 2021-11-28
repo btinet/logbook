@@ -4,6 +4,7 @@ namespace App;
 
 
 
+use Exception;
 use Spyc;
 use Steampixel\Route;
 
@@ -18,38 +19,45 @@ class Bootstrap
         $this->routes = Spyc::YAMLLoad(project_root.'/config/routes.yaml');
     }
 
+    /**
+     * @throws \Exception
+     */
+    private function runControllerMethod($class, $method, $mandatory = false)
+    {
+        if (!class_exists($class)) {
+            throw new \Exception('Class not found.');
+        } else {
+            $class = new $class;
+            if(!method_exists($class,$method)) {
+                throw new \Exception('Method not found.');
+            } else {
+                return $class->$method($mandatory);
+            }
+        }
+    }
+
     public function addRoutes()
     {
         foreach ($this->routes as $route)
         {
-
             if($route['value'])
             {
                 $this->routing->add($route['expression'], function ($id) use ($route) {
-                    $controller = false;
-                    $method = false;
-                    extract($route);
-                    if (class_exists($controller)) {
-                        $class = new $controller;
-                    } else {
-                        throw new \Exception('Class not found');
+                    try {
+                        return $this->runControllerMethod($route['controller'],$route['method'],$id);
+                    } catch (Exception $e) {
+                        return 'Exception abgefangen: '. $e->getMessage() . "\n";
                     }
-                    return $class->$method($id);
                 }, $route['request']);
             } else {
                 $this->routing->add($route['expression'], function () use ($route) {
-                    $controller = false;
-                    $method = false;
-                    extract($route);
-                    if (class_exists($controller)) {
-                        $class = new $controller;
-                    } else {
-                        throw new \Exception('Class not found');
+                    try {
+                        return $this->runControllerMethod($route['controller'],$route['method']);
+                    } catch (Exception $e) {
+                        return 'Exception abgefangen: '. $e->getMessage() . "\n";
                     }
-                    return $class->$method();
                 }, $route['request']);
             }
-
         }
     }
 
