@@ -18,3 +18,17 @@ user_login:
   controller: 'App\Controller\SecurityController'
   method: 'login'
   request: ['get','post']
+
+user_logout:
+  expression: '/logout'
+  value:
+  controller: 'App\Controller\SecurityController'
+  method: 'logout'
+  request: ['get','post']
+
+user_signup:
+  expression: '/signup'
+  value:
+  controller: 'App\Controller\SecurityController'
+  method: 'register'
+  request: ['get','post']

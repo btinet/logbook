@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Service\PasswordService;
+
 class User
 {
     /**
@@ -88,7 +90,7 @@ class User
      */
     public function setPassword(string $password): void
     {
-        $this->password = $password;
+        $this->password = PasswordService::hash($password);
     }
 
     /**

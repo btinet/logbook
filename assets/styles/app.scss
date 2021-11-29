@@ -8,7 +8,7 @@ $mint:      rgb(0,199,190);
 $orange:    rgb(255,149,0);
 $pink:      rgb(255,45,85);
 $purple:    rgb(175,82,222);
-$red:       rgb(255,59,48);
+$red:       #dc3545;
 $teal:      rgb(48,176,199);
 $yellow:    rgb(255,204,0);
 
@@ -31,6 +31,8 @@ $theme-colors:(
         "dark":       $gray-900,
         "light":      $gray-100,
         "white":      $white,
+        "pink":       $pink,
+        "purple":     $purple,
 );
 
 // Fonts
@@ -65,7 +67,7 @@ $input-padding-y: .45rem;
 $input-box-shadow: none;
 
 .was-validated .input:invalid{
-  border-color: #dc3545;
+  border-color: map-get($theme-colors,'danger');
   padding-right: calc(1.5em + .75rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
@@ -74,7 +76,7 @@ $input-box-shadow: none;
 }
 
 .was-validated .input:valid{
-  border-color: #198754;
+  border-color: map-get($theme-colors,'success');
   padding-right: calc(1.5em + .75rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
@@ -87,7 +89,7 @@ $input-box-shadow: none;
   width: 100%;
   margin-top: .25rem;
   font-size: .875em;
-  color: #dc3545;
+  color: map-get($theme-colors,'danger');
 }
 
 .was-validated :invalid ~ .invalid-feedback, .was-validated :invalid ~ .invalid-tooltip {
@@ -711,14 +713,41 @@ $flex-aligns: start end baseline center stretch;
   }
 }
 
+a:not([class]){
+  color: map-get($theme-colors,'primary');
+  &:link {
+    color: map-get($theme-colors, 'primary');
+  }
+  &:focus{
+    color: map-get($theme-colors,'primary');
+  }
+  &:hover{
+    color: darken(map-get($theme-colors,'primary'),10%);
+  }
+}
+
+
 .navbar{
   ul.navbar-nav{
     @include margin-y(0,0);
     @include padding-x(0,0);
     > li{
       display: inline-block;
+      height: 100%;
+      > a{
+        display: flex;
+        height: 100%;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-align-items: center;
+      }
     }
   }
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
 }
 
 #table-1{

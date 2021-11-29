@@ -14,7 +14,8 @@ class AppController extends AbstractController
         $userAll = $userRepository->findAll();
 
         return $this->render('app/index.html.twig',[
-            'user_all' => $userAll
+            'user_all' => $userAll,
+            'flash' => $this->getFlash()
         ]);
     }
 

@@ -3,26 +3,34 @@
 {% block content %}
     <div class="container">
         <h1>{{ trans["title"]["login"] }}</h1>
-        <form method="post" class="row row-sm-1 row-md-2 row-lg-2 row-lg-2 needs-validation" novalidate>
+        <div class="row row-sm-1 row-md-1 row-lg-2 row-lg-2">
             <div>
-                <label for="username">Benutzername</label>
-                <input type="text" name="username" id="username" class="input" value="{{ user.username|default('') }}" placeholder="Benutzername" required="required" aria-required="true">
-                <div class="invalid-feedback">
-                    {{ trans["input"]["user"]["empty"] }}
-                </div>
+                <p class="lead">Einloggen, um fortzusetzen.</p>
+                <form method="post" class="row row-sm-1 row-md-1 row-lg-1 row-lg-1 needs-validation" novalidate>
+                    <div>
+                        <label for="username">Benutzername</label>
+                        <input type="text" name="username" id="username" class="input" value="{{ user.username|default('') }}" placeholder="Benutzername" required="required" aria-required="true">
+                        <div class="invalid-feedback">
+                            {{ trans["input"]["user"]["empty"] }}
+                        </div>
+                    </div>
+                    <div>
+                        <label for="password">Passwort</label>
+                        <input type="password" name="password" id="password" class="input" value="{{ user.password|default('') }}" placeholder="Passwort" required="required" aria-required="true">
+                        <div class="invalid-feedback">
+                            {{ trans["input"]["password"]["empty"] }}
+                        </div>
+                    </div>
+                    <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
+                    <p class="small">Mit Klick auf <span class="text-emphasised">{{ trans["button"]["submit"]["login"] }}</span> erklärst du dich mit den <a href="#">Nutzungsbedingungen</a> einverstanden.</p>
+                    <div>
+                        <button type="submit" class="btn btn-primary px-5">{{ trans["button"]["submit"]["login"] }}</button>
+                    </div>
+                </form>
             </div>
-            <div>
-                <label for="password">Passwort</label>
-                <input type="text" name="password" id="password" class="input" value="{{ user.password|default('') }}" placeholder="Passwort" required="required" aria-required="true">
-                <div class="invalid-feedback">
-                    {{ trans["input"]["password"]["empty"] }}
-                </div>
+            <div class="p-3">
+                <img src="{{ link('images/graphics/signin_001.svg') }}" alt="sin in" class="img-fluid">
             </div>
-            <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
-            <div>
-                <button type="submit" class="btn btn-primary">{{ trans["button"]["submit"]["login"] }}</button>
-            </div>
-        </form>
-        {{ flash|raw }}
+        </div>
     </div>
 {% endblock %}

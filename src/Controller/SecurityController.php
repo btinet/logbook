@@ -11,7 +11,7 @@ class SecurityController extends AbstractController
 
     public function login (): string
     {
-        if($this->session->get('login')) $this->redirect(302,'user/index');
+        if($this->session->get('login')) $this->redirect(302,'');
         $userInputData = 0;
         if($this->request->isPostRequest() && $this->request->isFormSubmitted()) {
             $userInputData = [
@@ -26,7 +26,7 @@ class SecurityController extends AbstractController
                     $this->session->set('login',true);
                 }
                 $this->setFlash(201);
-                $this->redirect(302,'user/index');
+                $this->redirect(302,'');
             } else {
                 $this->setFlash($tryLoginLastError, 'danger');
             }
@@ -41,15 +41,15 @@ class SecurityController extends AbstractController
     {
         if($this->session->get('login')){
             $this->session->destroy();
-            $this->redirect(302,'user/logout');
+            $this->redirect(302,'logout');
         }
-        return $this->render('user/logout.html.twig',[
+        return $this->render('security/logout.html.twig',[
         ]);
     }
 
     public function register (): string
     {
-        if($this->session->get('login')) $this->redirect(302,'user/index');
+        if($this->session->get('login')) $this->redirect(302,'');
         $userInputData = null;
         if($this->request->isPostRequest() && $this->request->isFormSubmitted()){
             $userInputData = [
@@ -75,12 +75,12 @@ class SecurityController extends AbstractController
                 $user->setLastname($userInputData['lastname']);
                 $this->getEntityManager()->persist($user);
                 $this->setFlash(200);
-                $this->redirect(302,'user/login');
+                $this->redirect(302,'login');
             } else {
                 $this->setFlash($validationLastError, 'danger');
             }
         }
-        return $this->render('user/register.html.twig',[
+        return $this->render('security/register.html.twig',[
             'flash' => $this->getflash(),
             'user' => $userInputData
         ]);
