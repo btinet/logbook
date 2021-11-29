@@ -1,0 +1,24 @@
+{% extends 'app.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Login</h1>
+        <form method="post" class="row row-sm-1 row-md-2 row-lg-2 row-lg-2">
+            <div>
+                <label for="username">Benutzername</label>
+                <input type="text" name="username" id="username" class="input" placeholder="Benutzername">
+            </div>
+            <div>
+                <label for="password">Passwort</label>
+                <input type="text" name="password" id="password" class="input" placeholder="Passwort">
+            </div>
+            <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
+            <div>
+                <button type="submit" class="btn btn-primary">Einloggen</button>
+            </div>
+        </form>
+        {% for key, value in flash %}
+            <p><b>{{ key }}:</b> {{ value }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

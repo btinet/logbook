@@ -11,3 +11,10 @@ app_edit:
   controller: 'App\Controller\AppController'
   method: 'edit'
   request: 'get'
+
+user_login:
+  expression: '/login'
+  value:
+  controller: 'App\Controller\SecurityController'
+  method: 'login'
+  request: ['get','post']
