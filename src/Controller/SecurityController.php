@@ -86,4 +86,89 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    public function update(string $column){
+        if(!$this->session->get('login')) $this->redirect(302,'user/login');
+
+        $user = $this->getUser();
+        if (!property_exists($user,$column)) {
+            $this->flash->add(403,'danger');
+            $this->redirect(302,'user/login');
+        }
+        unset($user->isBlocked);
+        if($this->request->isPostRequest() && $this->request->isFormSubmitted()) {
+
+            $userRepository = $this->getRepository(User::class);
+
+            switch($column){
+                case 'username':
+                    $user->setUsername($this->request->post('username'));
+                    if ( 0 === ($isUniqueLastError = UserService::isUnique($userRepository,'username',['username' => $user->getUsername()],21011)) ){
+                        unset($user->password);
+                        $this->getEntityManager()->persist($user,$this->session->get('user'));
+                        $this->flash->add(200);
+                        $this->redirect(302,'user/index');
+                    } else {
+                        $this->flash->add($isUniqueLastError, 'danger');
+                    }
+                    break;
+                case 'email':
+                    $user->setEmail($this->request->post('email'));
+                    if ( 0 !== ($isEmailLastError = UserService::isEmail('email',['email' => $user->getEmail()],21022)) ) {
+                        $this->flash->add($isEmailLastError, 'danger');
+                        break;
+                    }
+                    if ( 0 === ($isUniqueLastError = UserService::isUnique($userRepository,'email',['email' => $user->getEmail()],21012)) ){
+                        unset($user->password);
+                        $this->getEntityManager()->persist($user,$this->session->get('user'));
+                        $this->flash->add(200);
+                        $this->redirect(302,'user/index');
+                    } else {
+                        $this->flash->add($isUniqueLastError, 'danger');
+                    }
+                    break;
+                case 'password':
+                    $userInputData = [
+                        'username' => $user->getUsername(),
+                        'password' => [
+                            $this->request->post('password_a'),
+                            $this->request->post('password_b'),
+                            $this->request->post('password_old'),
+                        ],
+                    ];
+                    if(0 !== $passwordLastError = UserService::isMatch($userRepository,$userInputData)) {
+                        $this->flash->add($passwordLastError, 'danger');
+                        break;
+                    }
+                    if(0 != $passwordLastError = PasswordService::validate($userInputData['password'])){
+                        $this->flash->add($passwordLastError, 'danger');
+                        break;
+                    } else {
+                        $user->setPassword(array_shift($userInputData['password']));
+                        $this->getEntityManager()->persist($user,$this->session->get('user'));
+                        $this->flash->add(200);
+                        $this->redirect(302,'user/index');
+                    }
+                    break;
+                case 'language':
+
+                    unset($user->password);
+                    $user->setLanguage($this->request->post('language'));
+                    $this->getEntityManager()->persist($user,$this->session->get('user'));
+                    $this->flash->add(200);
+                    $this->redirect(302,'user/index');
+                    break;
+                default:
+                    $this->flash->add(403);
+                    $this->redirect(302,'user/index');
+                    break;
+            }
+        }
+
+        $this->view->render('user/update.html.twig',[
+            'flash' => $this->flash,
+            'column' => $column,
+            'user' => $user
+        ]);
+    }
+
 }
