@@ -5,6 +5,7 @@ namespace App;
 
 use App\Extension\Twig\TwigExtension;
 use App\Service\EntityManagerService;
+use App\Service\Translation;
 use Exception;
 use ReflectionClass;
 use Twig\Environment;
@@ -18,6 +19,7 @@ abstract class AbstractController
      */
     protected Environment $view;
     protected Session $session;
+    protected array $trans;
     protected Request $request;
 
     function __construct(){
@@ -26,6 +28,8 @@ abstract class AbstractController
 
         $this->session = new Session();
         $this->session->init();
+        $trans = new Translation($this->session);
+        $this->trans = $trans->parse();
 
         $this->request = new Request($this->session->get('csrf_token'));
         $this->generateToken();
@@ -42,6 +46,9 @@ abstract class AbstractController
         $this->view->addExtension(new TwigExtension());
         $this->view->addGlobal('session',$this->session);
         $this->view->addGlobal('csrf_token',$this->session->get('csrf_token'));
+        $this->view->addGlobal('trans',$this->trans);
+        $this->view->addGlobal('locale',$trans->locale);
+        $this->view->addGlobal('locales',$trans->availableLanguages);
     }
 
     /**
@@ -80,7 +87,8 @@ abstract class AbstractController
      * @param string|null $message
      * @param string|null $type
      */
-    public function getFlash(string $message = null, string $type = null) {
+    public function getFlash(string $message = null, string $type = null): ?string
+    {
 
         $message = $message ? $message : $this->session->get('message');
         $type = $type ? $type : $this->session->get('message_type');
@@ -96,18 +104,18 @@ abstract class AbstractController
             $this->session->clear('message_type');
             return $flash;
         }
+        return null;
     }
 
     /**
-     * @param false $message
+     * @param string $message
      * @param string $type
-     * @return false
+     * @return void
      */
-    public function setFlash(bool $message = null, string $type = 'success'): bool
+    public function setFlash(string $message, string $type = 'success'): void
     {
         $this->session->set('message', $message);
         $this->session->set('message_type', $type);
-        return false;
     }
 
     public function generateToken(): string

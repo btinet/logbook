@@ -4,15 +4,17 @@ namespace App\Service;
 
 class UserService
 {
+    // Benutzer Login
     public static function tryLogin($repository, array $data): int
     {
-        if(0 != $usernameLastError = self::isString('username',$data,21031)) return $usernameLastError;
-        if(null === $usernameLastError = $repository->findOneBy(['username' => $data['username']])) return 210111;
-        if(0 != $userLastError = self::isMatch($repository,$data)) return $userLastError;
+        if(0 != $usernameLastError = self::isString('username',$data,21031)) return $usernameLastError; // Kein String
+        if(null === $usernameLastError = $repository->findOneBy(['username' => $data['username']])) return 210111;  // Benutzername existiert nicht
+        if(0 != $userLastError = self::isMatch($repository,$data)) return $userLastError; // Benutzername und Passwort stimmen nicht überein
 
-        return 0;
+        return 0;   // Alles in Ordnung
     }
 
+    // Benutzer Register
     public static function validate($repository, array $data): int
     {
         if(0 != $usernameLastError = self::isString('username',$data,21031)) return $usernameLastError;
