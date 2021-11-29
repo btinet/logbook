@@ -6,16 +6,16 @@
             <div class="container">
                 <nav class="navbar d-flex justify-content-space-between">
                     <ul class="navbar-nav">
-                        <li><a href="{{ route('') }}" class="btn btn-dark py-2">Klassenbuch</a></li>
-                        <li><a href="{{ route('') }}" class="btn btn-dark py-2">Noten</a></li>
+                        <li><a href="{{ route('') }}" class="btn btn-dark py-2">{{ trans["nav"]["action"]["logbook"] }}</a></li>
+                        <li><a href="{{ route('') }}" class="btn btn-dark py-2">{{ trans["nav"]["action"]["grades"] }}</a></li>
                     </ul>
                     <ul class="navbar-nav">
-                        <li><a href="{{ route('login') }}" class="btn btn-dark py-2">Login</a></li>
+                        <li><a href="{{ route('login') }}" class="btn btn-dark py-2">{{ trans["nav"]["action"]["login"] }}</a></li>
                     </ul>
                 </nav>
             </div>
         </section>
-        <div class="p-3">Sprache: {{ locale }}</div>
+        <div class="p-3 d-none">Sprache: {{ locale }}</div>
     {% endblock %}
     {% block content %}{% endblock %}
 {% endblock %}

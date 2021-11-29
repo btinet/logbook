@@ -64,6 +64,36 @@ $input-padding-x: .45rem;
 $input-padding-y: .45rem;
 $input-box-shadow: none;
 
+.was-validated .input:invalid{
+  border-color: #dc3545;
+  padding-right: calc(1.5em + .75rem);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: left  center;
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+.was-validated .input:valid{
+  border-color: #198754;
+  padding-right: calc(1.5em + .75rem);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+.invalid-feedback{
+  display: none;
+  width: 100%;
+  margin-top: .25rem;
+  font-size: .875em;
+  color: #dc3545;
+}
+
+.was-validated :invalid ~ .invalid-feedback, .was-validated :invalid ~ .invalid-tooltip {
+  display: block;
+}
+
 $breakpoints:(
         "xs"  : 470px,
         "s"   : 576px,
@@ -71,7 +101,7 @@ $breakpoints:(
         "l"   : 1080px,
 );
 
-$display-styles: inline-block inline block flex;
+$display-styles: inline-block inline block flex none;
 $known-prefixes: webkit, moz, ms, o;
 
 $columns:   12;
@@ -185,11 +215,13 @@ label{
   font-family: $font-family-sans;
   font-size: .9rem;
   border-radius: $input-border-radius;
+  -webkit-border-radius: 0;
+  -webkit-appearance: none;
   border: $input-border solid $input-border-color;
   border-top: none;
   border-left: none;
   border-right: none;
-  @include padding-x($input-padding-x*2,$input-padding-x*2);
+  @include padding-x($input-padding-x*3,$input-padding-x*2);
   @include padding-y($input-padding-y,$input-padding-y);
   @include transition-all;
   &:hover{
@@ -388,6 +420,15 @@ p{
 @each $name, $value in $theme-colors {
   .bg-#{$name} {
     background-color: $value;
+  }
+}
+
+// Borders
+.border-color-{
+  @each $name, $value in $theme-colors {
+    &#{$name}{
+      border: 1px solid $value;
+    }
   }
 }
 

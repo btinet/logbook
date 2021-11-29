@@ -2,19 +2,25 @@
 
 {% block content %}
     <div class="container">
-        <h1>Login</h1>
-        <form method="post" class="row row-sm-1 row-md-2 row-lg-2 row-lg-2">
+        <h1>{{ trans["title"]["login"] }}</h1>
+        <form method="post" class="row row-sm-1 row-md-2 row-lg-2 row-lg-2 needs-validation" novalidate>
             <div>
                 <label for="username">Benutzername</label>
-                <input type="text" name="username" id="username" class="input" value="{{ user.username|default('') }}" placeholder="Benutzername">
+                <input type="text" name="username" id="username" class="input" value="{{ user.username|default('') }}" placeholder="Benutzername" required="required" aria-required="true">
+                <div class="invalid-feedback">
+                    {{ trans["input"]["user"]["empty"] }}
+                </div>
             </div>
             <div>
                 <label for="password">Passwort</label>
-                <input type="text" name="password" id="password" class="input" value="{{ user.password|default('') }}" placeholder="Passwort">
+                <input type="text" name="password" id="password" class="input" value="{{ user.password|default('') }}" placeholder="Passwort" required="required" aria-required="true">
+                <div class="invalid-feedback">
+                    {{ trans["input"]["password"]["empty"] }}
+                </div>
             </div>
             <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
             <div>
-                <button type="submit" class="btn btn-primary">Einloggen</button>
+                <button type="submit" class="btn btn-primary">{{ trans["button"]["submit"]["login"] }}</button>
             </div>
         </form>
         {{ flash|raw }}

@@ -9,7 +9,8 @@ use App\Service\UserService;
 class SecurityController extends AbstractController
 {
 
-    public function login (){
+    public function login (): string
+    {
         if($this->session->get('login')) $this->redirect(302,'user/index');
         $userInputData = 0;
         if($this->request->isPostRequest() && $this->request->isFormSubmitted()) {
@@ -36,16 +37,18 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    public function logout (){
+    public function logout (): string
+    {
         if($this->session->get('login')){
             $this->session->destroy();
             $this->redirect(302,'user/logout');
         }
-        $this->render('user/logout.html.twig',[
+        return $this->render('user/logout.html.twig',[
         ]);
     }
 
-    public function register (){
+    public function register (): string
+    {
         if($this->session->get('login')) $this->redirect(302,'user/index');
         $userInputData = null;
         if($this->request->isPostRequest() && $this->request->isFormSubmitted()){
@@ -77,7 +80,7 @@ class SecurityController extends AbstractController
                 $this->setFlash($validationLastError, 'danger');
             }
         }
-        $this->render('user/register.html.twig',[
+        return $this->render('user/register.html.twig',[
             'flash' => $this->getflash(),
             'user' => $userInputData
         ]);

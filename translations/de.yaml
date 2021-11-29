@@ -1,2 +1,21 @@
 210111: Benutzer nicht gefunden.
 210112: Benutzer und Passwort stimmen nicht überein.
+
+input:
+  user:
+    empty:  Bitte Benuternamen angeben!
+  password:
+    empty:  Bitte Passwort angeben!
+
+button:
+  submit:
+    login:  Einloggen
+
+nav:
+  action:
+    login:  Login
+    logbook:  Klassenbuch
+    grades: Noten
+
+title:
+  login:  Anmelden
