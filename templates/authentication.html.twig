@@ -14,15 +14,5 @@
     {% block flash_messages %}
         {{ flash|raw }}
     {% endblock %}
-    <main class="flex-grow-1">
-        {% block content %}{% endblock %}
-    </main>
-    {% block footer %}
-        <footer class="bg-dark text-light py-1 mt-5">
-            <div class="container">
-                <span class="small">Copyright &copy;2021 - Benjamin Wagner</span>
-            </div>
-        </footer>
-    {% endblock %}
-
+    {% block content %}{% endblock %}
 {% endblock %}

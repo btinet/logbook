@@ -1,15 +1,23 @@
 {% extends 'app.html.twig' %}
 
-{% block content %}
-    <div class="container">
-        <h1>{{ trans["title"]["logout"] }}</h1>
-        <div class="row row-sm-1 row-md-1 row-lg-2 row-lg-2">
-            <div>
-                <p class="lead">Vielen Dank für deinen Besuch.</p>
-                <a href="{{ route('login') }}">Wieder einloggen</a>
-            </div>
-            <div class="p-3">
+{% block navigation %}
 
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex flex-column justify-content-center align-items-center h-100 flex-grow-1">
+        <p class="lead mb-3">Task Manager App</p>
+        <div class="mx-auto bg-light border border-color-dark px-3 shadow-sm" style="max-width: 576px">
+            <div class="d-flex justify-content-space-between align-items-flex-end">
+                <div>
+                    <h1>{{ trans["title"]["logout"] }}</h1>
+                    <p>Noch etwas vergessen? Jetzt <a href="{{ route('login') }}">einloggen</a>!</p>
+                </div>
+                <img src="{{ link('images/graphics/signup_001.svg') }}" class="img-fluid ms-2" style="max-height: 98px">
+            </div>
+            <hr>
+            <div class="row row-sm-1 row-md-1 row-lg-1 row-lg-1 mb-3">
+                <p>Bis zum nächsten Mal.</p>
             </div>
         </div>
     </div>

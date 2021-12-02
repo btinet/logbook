@@ -18,7 +18,8 @@
       "ext-json": "*",
         "twig/twig": " 3.0",
       "ext-pdo": "*",
-      "ext-mbstring": "*"
+      "ext-mbstring": "*",
+        "knplabs/knp-time-bundle": "^1.17"
     },
     "autoload": {
         "psr-4": {

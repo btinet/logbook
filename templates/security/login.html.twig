@@ -1,12 +1,30 @@
 {% extends 'app.html.twig' %}
 
+{% block navigation %}
+
+{% endblock %}
+
 {% block content %}
-    <div class="container">
-        <h1>{{ trans["title"]["login"] }}</h1>
-        <div class="row row-sm-1 row-md-1 row-lg-2 row-lg-2">
-            <div>
-                <p class="lead">Einloggen, um fortzusetzen.</p>
-                <form method="post" class="row row-sm-1 row-md-1 row-lg-1 row-lg-1 needs-validation" novalidate>
+    <div class="d-flex flex-column justify-content-center align-items-center h-100 flex-grow-1">
+        <p class="lead mb-3">Task Manager App</p>
+        <div class="mx-auto bg-light border border-color-dark shadow-sm" style="max-width: 576px">
+            <div class="body mb-3">
+                <div class="d-flex justify-content-space-between align-items-flex-end">
+                    <div>
+                        <h1>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                                <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                            </svg>
+                            <span>{{ trans["title"]["login"] }}</span>
+                        </h1>
+                        <p>Noch nicht dabei? Jetzt <a href="{{ route('signup') }}">registrieren</a>!</p>
+                    </div>
+                    <img src="{{ link('images/graphics/signin_001.svg') }}" class="img-fluid ms-2" style="max-height: 98px">
+                </div>
+                <hr>
+                <span>Einloggen, um fortzusetzen.</span>
+                <form id="login_form" method="post" class="row row-sm-1 row-md-1 row-lg-1 row-lg-1 mb-0 needs-validation" novalidate>
                     <div>
                         <label for="username">Benutzername</label>
                         <input type="text" name="username" id="username" class="input" value="{{ user.username|default('') }}" placeholder="Benutzername" required="required" aria-required="true">
@@ -23,13 +41,10 @@
                     </div>
                     <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
                     <p class="small">Mit Klick auf <span class="text-emphasised">{{ trans["button"]["submit"]["login"] }}</span> erklärst du dich mit den <a href="#">Nutzungsbedingungen</a> einverstanden.</p>
-                    <div>
-                        <button type="submit" class="btn btn-primary px-5">{{ trans["button"]["submit"]["login"] }}</button>
-                    </div>
                 </form>
             </div>
-            <div class="p-3">
-                <img src="{{ link('images/graphics/signin_001.svg') }}" alt="sin in" class="img-fluid">
+            <div class="px-3 py-2 bg-tertiary">
+                <button form="login_form" type="submit" class="btn btn-primary px-5">{{ trans["button"]["submit"]["login"] }}</button>
             </div>
         </div>
     </div>

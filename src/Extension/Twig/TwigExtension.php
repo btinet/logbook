@@ -4,6 +4,8 @@
 namespace App\Extension\Twig;
 
 
+use Twig\TwigFilter;
+
 class TwigExtension extends \Twig\Extension\AbstractExtension
 {
     private function getHost(): string
@@ -32,11 +34,24 @@ class TwigExtension extends \Twig\Extension\AbstractExtension
         return $uri;
     }
 
+    function twig_json_decode($json)
+    {
+        return json_decode($json, true);
+    }
+
+    public function getFilters()
+    {
+        return [
+            new TwigFilter('json_decode', [$this, 'twig_json_decode']),
+        ];
+    }
+
     public function getFunctions(): array
     {
         return [
             new \Twig\TwigFunction('link', array($this,'generateLink')),
             new \Twig\TwigFunction('route', array($this,'generateRoute')),
+            new \Twig\TwigFunction('json_decode', array($this,'twig_json_decode')),
         ];
     }
 

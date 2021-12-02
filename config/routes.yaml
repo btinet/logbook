@@ -5,11 +5,11 @@ app_index:
   method:     'index'
   request:    'get'
 
-app_edit:
-  expression: '/user/([0-9]*)/edit'
-  value:      'id'
-  controller: 'App\Controller\AppController'
-  method: 'edit'
+task_index:
+  expression: '/task'
+  value:
+  controller: 'App\Controller\TaskController'
+  method: 'index'
   request: 'get'
 
 user_login:
@@ -32,3 +32,17 @@ user_signup:
   controller: 'App\Controller\SecurityController'
   method: 'register'
   request: ['get','post']
+
+semester_index:
+  expression: '/semester'
+  value:
+  controller: 'App\Controller\SemesterController'
+  method: 'index'
+  request: 'get'
+
+semester_view:
+  expression: '/semester/([0-9]*)/view'
+  value:  'id'
+  controller: 'App\Controller\SemesterController'
+  method: 'view'
+  request: 'get'

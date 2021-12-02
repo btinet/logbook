@@ -1,66 +1,79 @@
 {% extends 'app.html.twig' %}
 
+{% block navigation %}
+
+{% endblock %}
+
 {% block content %}
-    <section id="content" class="">
-        <div class="container">
-            <h1>{{ trans["title"]["signup"] }}</h1>
-            <div class="row row-sm-1 row-md-1 row-lg-2 row-lg-2">
-                <div>
-                    <p class="lead">Werde Teil der Community.</p>
-                    <form method="post" class="row row-sm-1 row-md-1 row-lg-1 row-lg-1 needs-validation" novalidate>
-                        <div>
-                            <label for="email">E-Mail-Adresse</label>
-                            <input type="text" name="email" id="email" class="input" value="{{ user.email|default('') }}" placeholder="E-Mail-Adresse" required="required" aria-required="true">
-                            <div class="invalid-feedback">
-                                {{ trans["input"]["email"]["empty"] }}
-                            </div>
-                        </div>
-                        <div>
-                            <label for="username">Benutzername</label>
-                            <input type="text" name="username" id="username" class="input" value="{{ user.username|default('') }}" placeholder="Benutzername" required="required" aria-required="true">
-                            <div class="invalid-feedback">
-                                {{ trans["input"]["user"]["empty"] }}
-                            </div>
-                        </div>
-                        <div>
-                            <label for="password_a">Passwort</label>
-                            <input type="password" name="password_a" id="password_a" class="input" value="{{ user.password_a|default('') }}" placeholder="Passwort" required="required" aria-required="true">
-                            <div class="invalid-feedback">
-                                {{ trans["input"]["password"]["empty"] }}
-                            </div>
-                        </div>
-                        <div>
-                            <label for="password_b">Passwort wiederholen</label>
-                            <input type="password" name="password_b" id="password_b" class="input" value="{{ user.password_b|default('') }}" placeholder="Passwort wiederholen" required="required" aria-required="true">
-                            <div class="invalid-feedback">
-                                {{ trans["input"]["password_retype"]["empty"] }}
-                            </div>
-                        </div>
-                        <div>
-                            <label for="firstname">Vorname</label>
-                            <input type="text" name="firstname" id="firstname" class="input" value="{{ user.firstname|default('') }}" placeholder="Vorname" required="required" aria-required="true">
-                            <div class="invalid-feedback">
-                                {{ trans["input"]["firstname"]["empty"] }}
-                            </div>
-                        </div>
-                        <div>
-                            <label for="lastname">Nachname</label>
-                            <input type="text" name="lastname" id="lastname" class="input" value="{{ user.lastname|default('') }}" placeholder="Nachname" required="required" aria-required="true">
-                            <div class="invalid-feedback">
-                                {{ trans["input"]["lastname"]["empty"] }}
-                            </div>
-                        </div>
-                        <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
-                        <p class="small">Mit Klick auf <span class="text-emphasised">{{ trans["button"]["submit"]["register"] }}</span> erklärst du dich mit den <a href="#">Nutzungsbedingungen</a> einverstanden.</p>
-                        <div>
-                            <button type="submit" class="btn btn-primary px-5">{{ trans["button"]["submit"]["register"] }}</button>
-                        </div>
-                    </form>
+    <div class="d-flex flex-column justify-content-center align-items-center h-100 flex-grow-1">
+        <p class="lead mb-3">Task Manager App</p>
+        <div class="mx-auto bg-light border border-color-dark shadow-sm" style="max-width: 576px">
+            <div class="body mb-3">
+                <div class="d-flex justify-content-space-between align-items-flex-end">
+                    <div>
+                        <h1>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+                                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                            </svg>
+                           <span>{{ trans["title"]["signup"] }}</span>
+                        </h1>
+                        <p>Bereits registriert? Jetzt <a href="{{ route('login') }}">einloggen</a>!</p>
+                    </div>
+                    <img src="{{ link('images/graphics/signup_001.svg') }}" class="img-fluid ms-2" style="max-height: 98px">
                 </div>
-                <div class="p-3">
-                    <img src="{{ link('images/graphics/signup_001.svg') }}" alt="sin in" class="img-fluid">
-                </div>
+                <hr>
+                <span>Registrieren und Teil der Community werden.</span>
+                <form id="register_form" method="post" class="row row-sm-1 row-md-1 row-lg-1 row-lg-1 needs-validation" novalidate>
+                    <div>
+                        <label for="email">E-Mail-Adresse</label>
+                        <input type="text" name="email" id="email" class="input" value="{{ user.email|default('') }}" placeholder="E-Mail-Adresse" required="required" aria-required="true">
+                        <div class="invalid-feedback">
+                            {{ trans["input"]["email"]["empty"] }}
+                        </div>
+                    </div>
+                    <div>
+                        <label for="username">Benutzername</label>
+                        <input type="text" name="username" id="username" class="input" value="{{ user.username|default('') }}" placeholder="Benutzername" required="required" aria-required="true">
+                        <div class="invalid-feedback">
+                            {{ trans["input"]["user"]["empty"] }}
+                        </div>
+                    </div>
+                    <div>
+                        <label for="password_a">Passwort</label>
+                        <input type="password" name="password_a" id="password_a" class="input" value="{{ user.password_a|default('') }}" placeholder="Passwort" required="required" aria-required="true">
+                        <div class="invalid-feedback">
+                            {{ trans["input"]["password"]["empty"] }}
+                        </div>
+                    </div>
+                    <div>
+                        <label for="password_b">Passwort wiederholen</label>
+                        <input type="password" name="password_b" id="password_b" class="input" value="{{ user.password_b|default('') }}" placeholder="Passwort wiederholen" required="required" aria-required="true">
+                        <div class="invalid-feedback">
+                            {{ trans["input"]["password_retype"]["empty"] }}
+                        </div>
+                    </div>
+                    <div>
+                        <label for="firstname">Vorname</label>
+                        <input type="text" name="firstname" id="firstname" class="input" value="{{ user.firstname|default('') }}" placeholder="Vorname" required="required" aria-required="true">
+                        <div class="invalid-feedback">
+                            {{ trans["input"]["firstname"]["empty"] }}
+                        </div>
+                    </div>
+                    <div>
+                        <label for="lastname">Nachname</label>
+                        <input type="text" name="lastname" id="lastname" class="input" value="{{ user.lastname|default('') }}" placeholder="Nachname" required="required" aria-required="true">
+                        <div class="invalid-feedback">
+                            {{ trans["input"]["lastname"]["empty"] }}
+                        </div>
+                    </div>
+                    <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
+                    <p class="small">Mit Klick auf <span class="text-emphasised">{{ trans["button"]["submit"]["register"] }}</span> erklärst du dich mit den <a href="#">Nutzungsbedingungen</a> einverstanden.</p>
+                </form>
+            </div>
+            <div class="px-3 py-2 bg-tertiary">
+                <button form="register_form" type="submit" class="btn btn-primary px-5">{{ trans["button"]["submit"]["register"] }}</button>
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}

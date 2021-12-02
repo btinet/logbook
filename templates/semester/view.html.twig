@@ -1,0 +1,43 @@
+{% extends 'app.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h1 class="mb-1">{{ trans["title"]["semesters"] }} > {{ current_semester.title|default('') }}</h1>
+        <div class="my-1">
+            <a href="{{ route('semester') }}" class="btn btn-primary small">Zurück</a>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Bezeichnung</th>
+                <th scope="col">Tutorium</th>
+                <th scope="col">Teilnehmende</th>
+                <th scope="col" class="d-flex justify-content-end">Aktion</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% if semesters %}
+                    {% for semester in semesters %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td><a href="{{ route("semester/#{semester.id}/view") }}">{{ semester.title }}</a></td>
+                            <td><a href="#">Herr Tanzer</a></td>
+                            <td>25</td>
+                            <td class="d-flex justify-content-end">
+                                {% if not semester.parent %}
+                                    <span class="btn disabled small">bearbeiten</span>
+                                {% else %}
+                                    <a href="#" class="btn btn-primary small">bearbeiten</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <p>Noch keine Klassen eingetragen.</p>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

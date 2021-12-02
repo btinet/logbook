@@ -9,6 +9,9 @@ use App\Service\UserService;
 class SecurityController extends AbstractController
 {
 
+    /**
+     * @throws \ReflectionException
+     */
     public function login (): string
     {
         if($this->session->get('login')) $this->redirect(302,'');
@@ -47,6 +50,9 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws \ReflectionException
+     */
     public function register (): string
     {
         if($this->session->get('login')) $this->redirect(302,'');
@@ -73,6 +79,9 @@ class SecurityController extends AbstractController
                 $user->setPassword($userInputData['password'][0]);
                 $user->setFirstname($userInputData['firstname']);
                 $user->setLastname($userInputData['lastname']);
+                $user->setRoles(['ROLE_USER']);
+                $user->setIsActive(true);
+                $user->setIsBlocked(false);
                 $this->getEntityManager()->persist($user);
                 $this->setFlash(200);
                 $this->redirect(302,'login');
@@ -86,6 +95,12 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws \Twig\Error\SyntaxError
+     * @throws \ReflectionException
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\LoaderError
+     */
     public function update(string $column){
         if(!$this->session->get('login')) $this->redirect(302,'user/login');
 
@@ -98,6 +113,8 @@ class SecurityController extends AbstractController
         if($this->request->isPostRequest() && $this->request->isFormSubmitted()) {
 
             $userRepository = $this->getRepository(User::class);
+
+            $user = new User();
 
             switch($column){
                 case 'username':

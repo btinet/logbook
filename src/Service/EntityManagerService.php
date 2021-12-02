@@ -19,6 +19,9 @@ class EntityManagerService
         $this->db = new Database();
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function persist($entity, $id = false){
         self::generateReflectionClass($entity);
         $class_name = strtolower($this->entity->getShortName());
@@ -32,8 +35,6 @@ class EntityManagerService
                         $entityProperty = $entity->$method();
                         if ($entityProperty instanceof \DateTime){
                             $entityProperty = $entityProperty->format('Y-m-d H:i:s');
-                        } else {
-                            $entityProperty = $entityProperty;
                         }
                         $data[$value] = $entityProperty;
                     }

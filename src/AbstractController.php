@@ -6,8 +6,13 @@ namespace App;
 use App\Extension\Twig\TwigExtension;
 use App\Service\EntityManagerService;
 use App\Service\Translation;
+use DateTime;
 use Exception;
+use Knp\Bundle\TimeBundle\DateTimeFormatter;
+use Knp\Bundle\TimeBundle\Twig\Extension\TimeExtension;
 use ReflectionClass;
+use ReflectionException;
+use Symfony\Component\Translation\Translator;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -21,7 +26,12 @@ abstract class AbstractController
     protected Session $session;
     protected array $trans;
     protected Request $request;
+    protected DateTime $now;
+    protected DateTimeFormatter $formatter;
 
+    /**
+     * @throws ReflectionException
+     */
     function __construct(){
 
         $debug = $_ENV['APP_ENV'] === 'development';
@@ -34,21 +44,27 @@ abstract class AbstractController
         $this->request = new Request($this->session->get('csrf_token'));
         $this->generateToken();
 
+        $this->now =new DateTime();
+
+
         $loader = new FilesystemLoader(project_root.'/templates');
         $this->view = new Environment($loader, [
             'cache' => project_root.'/var/cache',
             'debug' => $debug
         ]);
 
+
         if ($debug){
             $this->view->addExtension(new \Twig\Extension\DebugExtension());
         }
         $this->view->addExtension(new TwigExtension());
         $this->view->addGlobal('session',$this->session);
+        $this->view->addGlobal('user',$this->getUser());
         $this->view->addGlobal('csrf_token',$this->session->get('csrf_token'));
         $this->view->addGlobal('trans',$this->trans);
         $this->view->addGlobal('locale',$trans->locale);
         $this->view->addGlobal('locales',$trans->availableLanguages);
+        $this->view->addGlobal('now',$this->now);
     }
 
     /**
@@ -61,7 +77,7 @@ abstract class AbstractController
         try {
             return $this->view->render($template, $options);
         } catch (Exception $e) {
-            return 'Template nicht gefunden, oder so.';
+            return $e->getMessage();
         }
     }
 
@@ -71,7 +87,7 @@ abstract class AbstractController
     }
 
     /**
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function getRepository($entity_class){
         $entity = new ReflectionClass($entity_class);
@@ -130,6 +146,21 @@ abstract class AbstractController
         return $csrfToken;
     }
 
+    /**
+     * @throws ReflectionException
+     */
+    public function getUser()
+    {
+        if($this->session->get('login') && $this->session->get('user'))
+        {
+            $userRepository = $this->getRepository($_ENV['USER_ENTITY']);
+            return $userRepository->findOneBy([
+                'id' => $this->session->get('user')
+            ]);
+        }
+        return null;
+    }
+
     public function redirect($status, $url = null) {
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
         header('Location: ' .$protocol.host.'/'.$url, true, $status);
@@ -148,5 +179,24 @@ abstract class AbstractController
             $route .= "#$anchor";
         }
         return $protocol.$_SERVER['HTTP_HOST'].'/'.$route;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function denyUnlessGranted(string $role = null): bool
+    {
+        if(!$user = $this->getUser()){
+            $this->setFlash(400,'warning');
+            $this->redirect(302,'login');
+        }
+
+        $userRole = $user['roles'];
+
+        if($role && !in_array($role,json_decode($userRole))){
+            $this->setFlash(401,'danger');
+            $this->redirect(302,'logout');
+        }
+        return true;
     }
 }

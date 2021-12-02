@@ -167,7 +167,7 @@ class User
     /**
      * @return bool
      */
-    public function isActive(): bool
+    public function GetIsActive(): bool
     {
         return $this->isActive;
     }
@@ -183,7 +183,7 @@ class User
     /**
      * @return bool
      */
-    public function isBlocked(): bool
+    public function getIsBlocked(): bool
     {
         return $this->isBlocked;
     }

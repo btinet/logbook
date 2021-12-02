@@ -1,6 +1,9 @@
 200: Aktion war erfolgreich.
 201: Login erfolgreich.
 
+400: Bitte einloggen, um auf die Ressource zuzugreifen.
+401: Du besitzt nicht die erforderlichen Berechtigungen.
+
 1601: Passwort ist keine Zeichenkette.
 1602: Passwörter stimmen nicht überein.
 1603: Passwort ist nicht lang genug.
@@ -51,8 +54,11 @@ nav:
     signup: Registrieren
     logbook:  Klassenbuch
     grades: Noten
+    semesters: Semester
+    task: Tasks
 
 title:
   login:  Anmelden
-  logout: Auf Wiedersehen
+  logout: Tschüss!
   signup: Registrieren
+  semesters: Semester

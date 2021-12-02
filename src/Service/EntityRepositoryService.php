@@ -20,24 +20,29 @@ abstract class EntityRepositoryService
         $this->table = strtolower($entity->getShortName());
     }
 
-    protected function createSqlConditions(array $criteria, array $falseCriteria = array())
+    /**
+     * @param array $criteria
+     * @param array $falseCriteria
+     * @return string|null
+     */
+    protected function createSqlConditions(array $criteria, array $falseCriteria = array()): ?string
     {
+
         if (!empty($criteria)){
             $first = true;
             $criteria_data = null;
             foreach ($criteria as $property => $value){
                 $word = ($first) ? ' WHERE' : ' AND';
-                $criteria_data .= "$word $property = :$property";
+                if(!$value){
+                    $criteria_data .="$word $property IS NULL";
+                } else {
+                    $criteria_data .= "$word $property = :$property";
+                }
+
                 $first = false;
             }
         }
-
-        if (!empty($criteria) && !empty($falseCriteria)){
-            foreach ($falseCriteria as $property => $value){
-                $criteria_data .= " AND $property != :$property";
-            }
-        }
-
+        /** @var string $criteria_data */
         return $criteria_data;
     }
 
@@ -45,18 +50,36 @@ abstract class EntityRepositoryService
         return $this->db->select('SELECT * FROM '.$this->table.' ');
     }
 
-    public function findBy($criteria = array(), array $sort = array()){
-
+    /**
+     * @param array $criteria
+     * @param array $sort
+     * @return array|false
+     */
+    public function findBy(array $criteria,array $sort = []){
+        $merged_criteria = [];
         $criteria_data = $this->createSqlConditions($criteria);
+        $criteria = array_filter($criteria);
+        if($sort){
+            $property = array_keys($sort);
+            $property = $property[0];
+            $orderDirection = $sort[$property];
+            $criteria_data .= " ORDER BY $property $orderDirection";
+        }
         return $this->db->select('SELECT * FROM '.$this->table.' '.$criteria_data, $criteria);
 
     }
 
-    public function findOneBy($criteria = array(), array $sort = array()){
+    public function findOneBy(array $criteria = array(), array $sort = array())
+    {
 
         $criteria_data = $this->createSqlConditions($criteria);
         $result = $this->db->select(' SELECT * FROM '.$this->table.' '.$criteria_data.' LIMIT 1 ', $criteria);
-        return array_pop($result);
+
+        if($result){
+            return array_pop($result);
+        } else {
+            return false;
+        }
 
     }
 
