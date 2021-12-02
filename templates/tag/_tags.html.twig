@@ -1,0 +1,12 @@
+<a class="btn btn-light text-dark d-flex justify-content-space-between align-items-center">
+    <div class="d-flex justify-content-start align-items-center">
+        <div class="me-1">
+            <label for="state_{{ tag.id }}">Auswahl</label>
+            <input type="checkbox" name="tags[]" id="state_{{ tag.id }}" value="{{ tag.id }}">
+        </div>
+        <span class="text-emphasised">{{ tag.name }}</span>
+    </div>
+</a>
+{% if not loop.last %}
+    <hr class="my-0">
+{% endif %}

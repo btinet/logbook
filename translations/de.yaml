@@ -1,8 +1,11 @@
 200: Aktion war erfolgreich.
 201: Login erfolgreich.
+202: Tag wurde gespeichert.
 
 400: Bitte einloggen, um auf die Ressource zuzugreifen.
 401: Du besitzt nicht die erforderlichen Berechtigungen.
+
+411:  Tag wurde nicht gefunden.
 
 1601: Passwort ist keine Zeichenkette.
 1602: Passwörter stimmen nicht überein.
@@ -42,11 +45,15 @@ input:
     empty:  Bitte Vornamen angeben!
   lastname:
     empty:  Bitte Nachnamen angeben!
+  tag_name:
+    empty:  Bitte Tag-Namen angeben!
 
 button:
   submit:
     login:  Einloggen
     register: Registrieren
+    save: Speichern
+    update: Aktualisieren
 
 nav:
   action:
@@ -55,7 +62,8 @@ nav:
     logbook:  Klassenbuch
     grades: Noten
     semesters: Semester
-    task: Tasks
+    tasks: Tasks
+    tags: Tags
 
 title:
   login:  Anmelden

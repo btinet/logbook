@@ -10,7 +10,28 @@ task_index:
   value:
   controller: 'App\Controller\TaskController'
   method: 'index'
+  request: ['get','post']
+
+tag_index:
+  expression: '/tag'
+  value:
+  controller: 'App\Controller\TagController'
+  method: 'index'
   request: 'get'
+
+tag_new:
+  expression: '/tag/new'
+  value:
+  controller: 'App\Controller\TagController'
+  method: 'new'
+  request: ['get','post']
+
+tag_delete:
+  expression: '/tag/delete'
+  value:
+  controller: 'App\Controller\TagController'
+  method: 'delete'
+  request: 'post'
 
 user_login:
   expression: '/login'
@@ -32,17 +53,3 @@ user_signup:
   controller: 'App\Controller\SecurityController'
   method: 'register'
   request: ['get','post']
-
-semester_index:
-  expression: '/semester'
-  value:
-  controller: 'App\Controller\SemesterController'
-  method: 'index'
-  request: 'get'
-
-semester_view:
-  expression: '/semester/([0-9]*)/view'
-  value:  'id'
-  controller: 'App\Controller\SemesterController'
-  method: 'view'
-  request: 'get'

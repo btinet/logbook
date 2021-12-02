@@ -21,9 +21,6 @@ class Request
      */
     public string $csrf_token;
 
-    /**
-     * @var string
-     */
     public string $query;
 
     public function __construct($csrf_token){
@@ -52,6 +49,15 @@ class Request
     public function post(string $FormFieldName)
     {
         $query = filter_input(INPUT_POST, $FormFieldName, FILTER_SANITIZE_STRIPPED);
+        return $this->query = $query ?? false;
+    }
+
+    /**
+     * @param string $FormFieldName
+     */
+    public function getPostAsArray(string $FormFieldName)
+    {
+        $query = filter_input_array(INPUT_POST, $FormFieldName, FILTER_DEFAULT);
         return $this->query = $query ?? false;
     }
 }

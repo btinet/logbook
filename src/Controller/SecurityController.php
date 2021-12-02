@@ -36,7 +36,8 @@ class SecurityController extends AbstractController
         }
         return $this->render('security/login.html.twig',[
             'flash' => $this->getFlash(),
-            'user' => $userInputData
+            'user' => $userInputData,
+            'title' => 'TMA - Login'
         ]);
     }
 
@@ -47,6 +48,7 @@ class SecurityController extends AbstractController
             $this->redirect(302,'logout');
         }
         return $this->render('security/logout.html.twig',[
+            'title' => 'TMA - Bis bald!'
         ]);
     }
 
@@ -91,7 +93,8 @@ class SecurityController extends AbstractController
         }
         return $this->render('security/register.html.twig',[
             'flash' => $this->getflash(),
-            'user' => $userInputData
+            'user' => $userInputData,
+            'title' => 'TMA - Registrieren'
         ]);
     }
 
