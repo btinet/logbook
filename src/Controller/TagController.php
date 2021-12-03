@@ -48,6 +48,39 @@ class TagController extends AbstractController
     }
 
     /**
+     * @param int $id
+     * @return string
+     * @throws ReflectionException
+     */
+    public function update(int $id): string
+    {
+        $this->denyUnlessGranted('ROLE_USER');
+
+        $tag = $this->getRepository(Tag::class)->findOneBy(['id' => $id]);
+        if($tag)
+        {
+            if($this->request->isPostRequest() and $this->request->isFormSubmitted())
+            {
+                $tag = new Tag();
+                $tag->setName($this->request->post('name'));
+                $em = $this->getEntityManager();
+                $em->persist($tag,$id);
+                $this->setFlash(202);
+                $this->redirect(302,'tag');
+            }
+        } else {
+            $this->setFlash(411,'danger');
+            $this->redirect(302,'tag');
+        }
+
+        return $this->render('tag/update.html.twig',[
+            'flash' => $this->getFlash(),
+            'title' => 'TMA - Tag bearbeiten',
+            'tag' => $tag
+        ]);
+    }
+
+    /**
      * @throws ReflectionException
      */
     public function delete(): void

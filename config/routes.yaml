@@ -33,6 +33,13 @@ tag_new:
   method: 'new'
   request: ['get','post']
 
+tag_update:
+  expression: '/tag/([0-9]*)/update'
+  value:  'id'
+  controller: 'App\Controller\TagController'
+  method: 'update'
+  request: ['get','post']
+
 tag_delete:
   expression: '/tag/delete'
   value:

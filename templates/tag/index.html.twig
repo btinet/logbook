@@ -23,16 +23,10 @@
             </div>
             <div class="px-3 py-2 bg-tertiary d-flex justify-content-space-between align-items-center">
                 <a href="{{ route('tag/new') }}" class="btn btn-primary px-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
-                    </svg>
                     Neu
                 </a>
-                <button form="tags_form" type="submit" class="btn btn-danger">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                    </svg>
+                <button form="tags_form" id="tag_delete" type="submit" class="btn btn-danger disabled">
+                    {{ trans["button"]["submit"]["delete"] }}
                 </button>
             </div>
         </div>
@@ -45,17 +39,34 @@
         ( function (){
             'use strict'
 
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            let filter_forms = document.querySelectorAll('.filter_form');
+            let $submitButton = document.querySelector('#tag_delete');
+            let $formInputFields = document.querySelectorAll('.checkbox-action');
 
-            // Loop over them and prevent submission
-            Array.prototype.slice.call(filter_forms)
-                .forEach(function (form) {
-                    form.addEventListener('change', function (event) {
-                        this.form.submit();
-                        console.log('form submitted');
-                    }, false)
+            Array.prototype.slice.call($formInputFields)
+                .forEach(function ($field) {
+                    let $i = 0;
+                    addMultipleEventListener($field,['click',''],validateForm)
                 })
+
+            function addMultipleEventListener(element, events, handler) {
+                events.forEach(e => element.addEventListener(e, handler))
+            }
+
+            function validateForm($i){
+                Array.prototype.slice.call($formInputFields)
+                    .forEach(function ($field) {
+                        if($field.checked === true){
+                            $i = 1;
+                        }
+                    })
+                if($i === 1){
+                    $submitButton.classList.remove('disabled');
+                    $submitButton.removeAttribute('disabled');
+                } else {
+                    $submitButton.classList.add('disabled');
+                    $submitButton.setAttribute('disabled','disabled')
+                }
+            }
 
         })();
     </script>

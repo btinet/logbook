@@ -1,12 +1,17 @@
-<a class="btn btn-light text-dark d-flex justify-content-space-between align-items-center">
-    <div class="d-flex justify-content-start align-items-center">
-        <div class="me-1">
-            <label for="state_{{ tag.id }}">Auswahl</label>
-            <input type="checkbox" name="tags[]" id="state_{{ tag.id }}" value="{{ tag.id }}">
+<div style="position: relative">
+    <a href="{{ route("tag/#{tag.id}/update") }}" class="btn btn-light text-dark d-flex justify-content-space-between align-items-center">
+        <div class="d-flex justify-content-start align-items-center">
+            <span class="text-emphasised">{{ tag.name }}</span>
         </div>
-        <span class="text-emphasised">{{ tag.name }}</span>
+    </a>
+    <div class="me-1" style="position: absolute;right: 0;top:8px;">
+        <label for="state_{{ tag.id }}" class="switch">
+        <input type="checkbox" name="tags[]" class="checkbox-action" id="state_{{ tag.id }}" value="{{ tag.id }}">
+        <span class="slider"></span>
+        </label>
     </div>
-</a>
+</div>
+
 {% if not loop.last %}
     <hr class="my-0">
 {% endif %}
