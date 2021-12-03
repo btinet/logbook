@@ -22,7 +22,7 @@ class TaskRepository extends EntityRepositoryService
             $orderDirection = $sort[$property];
             $criteria_data .= " ORDER BY $property $orderDirection";
         }
-        return $this->db->select('SELECT * FROM '.$this->table.' LEFT JOIN tag ON '.$this->table.'.tag_id = tag.id AND '.$this->table.'.user_id = tag.user '.$criteria_data, $criteria);
+        return $this->db->select('SELECT * FROM tag LEFT JOIN '.$this->table.' ON tag.id = '.$this->table.'.tag_id AND tag.user = '.$this->table.'.user_id  '.$criteria_data, $criteria);
 
     }
 }

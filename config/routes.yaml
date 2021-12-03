@@ -12,6 +12,13 @@ task_index:
   method: 'index'
   request: ['get','post']
 
+task_delete:
+  expression: '/task/delete'
+  value:
+  controller: 'App\Controller\TaskController'
+  method: 'delete'
+  request: 'post'
+
 tag_index:
   expression: '/tag'
   value:

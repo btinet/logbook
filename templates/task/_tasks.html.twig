@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-start align-items-center">
         <div class="me-1">
             <label for="state_{{ task.id }}">Erledigt</label>
-            <input type="checkbox" name="state_{{ task.id }}" id="state_{{ task.id }}" value="{{ task.id }}">
+            <input type="checkbox" name="tasks[]" id="state_{{ task.id }}" value="{{ task.id }}">
         </div>
         <div class="d-flex flex-column align-items-flex-start">
             <span class="text-emphasised">{{ task.description }}</span>

@@ -48,24 +48,26 @@
                     </form>
                 </div>
                 <hr>
-                <div class="row" style="gap: 0">
+                <form id="tasks_form" method="post" action="{{ route('task/delete') }}" class="row" style="gap: 0">
                     {% if tasks %}
                         {% for task in tasks|filter(task => task.tag_id == tag_filter)  %}
                             {% if (now|date('Ymd') + due_date_filter) == task.dueDate|date('Ymd') or due_date_filter == 'all' %}
-                            {{ include('task/_tasks.html.twig') }}
+                                {{ include('task/_tasks.html.twig') }}
+                                <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
                             {% endif %}
                         {% endfor %}
                         {% if tag_filter == 'all' %}
                             {% for task in tasks  %}
                                 {% if (now|date('Ymd') + due_date_filter) == task.dueDate|date('Ymd') or due_date_filter == 'all' %}
                                     {{ include('task/_tasks.html.twig') }}
+                                    <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
                                 {% endif %}
                             {% endfor %}
                         {% endif %}
                     {% else %}
                         <span>Keine Aufgaben vorhanden!</span>
                     {% endif %}
-                </div>
+                </form>
             </div>
             <div class="px-3 py-2 bg-tertiary d-flex justify-content-space-between align-items-center">
                 <a class="btn btn-primary px-2">
@@ -74,7 +76,7 @@
                     </svg>
                     Neu
                 </a>
-                <button type="submit" class="btn btn-danger disabled ">
+                <button form="tasks_form" type="submit" class="btn btn-danger">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                         <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>

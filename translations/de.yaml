@@ -4,8 +4,10 @@
 
 400: Bitte einloggen, um auf die Ressource zuzugreifen.
 401: Du besitzt nicht die erforderlichen Berechtigungen.
+402:  Du hast keine Elemente ausgewählt.
 
 411:  Tag wurde nicht gefunden.
+412:  Task wurde nicht gefunden.
 
 1601: Passwort ist keine Zeichenkette.
 1602: Passwörter stimmen nicht überein.
