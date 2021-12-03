@@ -58,28 +58,27 @@ class TagController extends AbstractController
             $tags = $_POST['tags'];
             $tagRepository = $this->getRepository(Tag::class);
 
-            foreach ($tags as $key => $value)
+            if($tags)
             {
-                $tag = $tagRepository->findOneBy(['id' => $value]);
-                if($tag)
+                foreach ($tags as $key => $value)
                 {
-                    $tag = new Tag();
-                    $em = $this->getEntityManager()->remove($tag,$value);
-                    $this->setFlash(200);
+                    $tag = $tagRepository->findOneBy(['id' => $value,'user' => $this->session->get('user')]);
+                    if($tag)
+                    {
+                        $tag = new Tag();
+                        $em = $this->getEntityManager()->remove($tag,$value);
+                        $this->setFlash(200);
 
-                } else {
-                    $this->setFlash(411,'danger');
+                    } else {
+                        $this->setFlash(411,'danger');
+                    }
                 }
+            } else {
+                $this->setFlash(402,'warning');
             }
             $this->redirect(302,'tag');
-
-            // Todo: Iterate through all tag-items expected to be deleted.
-            /**
-                $em = $this->getEntityManager();
-                $em->remove($tag,$id);
-                $this->setFlash(202);
-                $this->redirect(302,'tag');
-             */
         }
+        $this->setFlash(401,'danger');
+        $this->redirect(302,'tag');
     }
 }
