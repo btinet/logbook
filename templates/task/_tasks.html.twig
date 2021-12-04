@@ -1,27 +1,54 @@
-<a class="btn btn-light text-dark d-flex justify-content-space-between align-items-center">
-    <div class="d-flex justify-content-start align-items-center">
-        <div class="me-1">
-            <label for="state_{{ task.id }}">Erledigt</label>
-            <input type="checkbox" name="tasks[]" id="state_{{ task.id }}" value="{{ task.id }}">
+<div style="position: relative">
+    <a {% if not task.done %}href="{{ route("task/#{task.id}/update") }}"{% endif %} class="btn btn-light {% if task.done %}task-done{% endif %} text-dark d-flex justify-content-space-between align-items-center">
+        <div class="d-flex justify-content-start align-items-center">
+            <span class="me-1">
+                {% if task.done %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
+                      <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
+                      <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
+                    </svg>
+                {% else %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    </svg>
+                {% endif %}
+            </span>
+            <div class="d-flex flex-column align-items-flex-start">
+                <span class="text-emphasised">{{ task.description }}</span>
+                <span class="small">{{ task.dueDate|date('d.m.Y') }}</span>
+            </div>
         </div>
-        <div class="d-flex flex-column align-items-flex-start">
-            <span class="text-emphasised">{{ task.description }}</span>
-            <span class="small">{{ task.dueDate|date('d.m.') }}</span>
-        </div>
-    </div>
-    <span class="d-flex justify-content-end px-content-1">
-    <span class="small bg-tertiary text-dark">{{ task.name }}</span>
+        <span class="d-flex justify-content-end px-content-1">
+            {% if task.notice_user %}
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                      <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+                    </svg>
+                </span>
+            {% endif %}
+    <span class="small bg-tertiary text-dark" style="margin-right: 3rem;">{{ task.name }}</span>
 </span>
-</a>
-{% if now|date('d.m.Y') - task.dueDate|date('d.m.Y') > 1   %}
-    <span class="bg-danger" style="height: 2px;width: 100%"></span>
-{% endif %}
-{% if now|date('d.m.Y') - task.dueDate|date('d.m.Y') == 1   %}
-    <span class="bg-warning" style="height: 2px;width: 100%"></span>
-{% endif %}
-{% if now|date('d.m.Y') == task.dueDate|date('d.m.Y')  %}
-    <span class="bg-success" style="height: 2px;width: 100%"></span>
-{% endif %}
-{% if now|date('d.m.Y') - task.dueDate|date('d.m.Y') <= -1 %}
-    <span class="bg-primary" style="height: 2px;width: 100%"></span>
+    </a>
+    <div class="me-1" style="position: absolute;right: 0;top:50%;margin-top: -.5rem;">
+        <label for="state_{{ task.id }}" class="switch switch-danger">
+            <input type="checkbox" name="tasks[]" class="checkbox-action" id="state_{{ task.id }}" value="{{ task.id }}">
+            <span class="slider"></span>
+        </label>
+    </div>
+</div>
+{% if task.done %}
+    <span class="bg-secondary" style="height: 1px;width: 100%"></span>
+{% else %}
+    {% if now|date('d.m.Y') - task.dueDate|date('d.m.Y') > 1   %}
+        <span class="bg-danger" style="height: 1px;width: 100%"></span>
+    {% endif %}
+    {% if now|date('d.m.Y') - task.dueDate|date('d.m.Y') == 1   %}
+        <span class="bg-warning" style="height: 1px;width: 100%"></span>
+    {% endif %}
+    {% if now|date('d.m.Y') == task.dueDate|date('d.m.Y')  %}
+        <span class="bg-success" style="height: 1px;width: 100%"></span>
+    {% endif %}
+    {% if now|date('d.m.Y') - task.dueDate|date('d.m.Y') <= -1 %}
+        <span class="bg-primary" style="height: 1px;width: 100%"></span>
+    {% endif %}
 {% endif %}

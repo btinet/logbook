@@ -14,7 +14,7 @@
                 </h2>
                 <p class="mb-1">Füge Aufgaben hinzu und behalte immer den Überblick.</p>
                 <div class="">
-                    <form method="post" class="row row-sm-1 row-md-1 row-lg-2 row-xl-2">
+                    <form method="post" class="row row-sm-1 row-md-1 row-lg-3 row-xl-3">
                         <div style="position: relative">
                             <div class="text-muted" style="position: absolute;left: 5px;top:9px">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
@@ -45,22 +45,44 @@
                                 {% endfor %}
                             </select>
                         </div>
+
+                        <div style="position: relative">
+                            <div class="text-muted" style="position: absolute;left: 5px;top:9px">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-square" viewBox="0 0 16 16">
+                                    <path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z"/>
+                                    <path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+                                </svg>
+                            </div>
+                            <label for="filter_done">Filtern</label>
+                            <select id="filter_done" name="done_filter" class="input filter_form">
+                                <option value="all" {% if done_filter == 'all' %}selected="selected"{% endif %}>alle</option>
+                                    <option value="0" {% if done_filter !=1 and done_filter != 'all' %}selected="selected"{% endif %}>unerledigt</option>
+                                    <option value="1" {% if done_filter == 1 %}selected="selected"{% endif %}>erledigt</option>
+                            </select>
+                        </div>
                     </form>
                 </div>
                 <hr>
                 <form id="tasks_form" method="post" action="{{ route('task/delete') }}" class="row" style="gap: 0">
                     {% if tasks %}
+                        {% if done_filter == 0 %}
+                        {% set done_filter = false %}
+                        {% endif %}
                         {% for task in tasks|filter(task => task.tag_id == tag_filter)  %}
                             {% if (now|date('Ymd') + due_date_filter) == task.dueDate|date('Ymd') or due_date_filter == 'all' %}
-                                {{ include('task/_tasks.html.twig') }}
-                                <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
+                                {% if task.done  == done_filter or done_filter == 'all' %}
+                                    {{ include('task/_tasks.html.twig') }}
+                                    <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
+                                {% endif %}
                             {% endif %}
                         {% endfor %}
                         {% if tag_filter == 'all' %}
                             {% for task in tasks  %}
                                 {% if (now|date('Ymd') + due_date_filter) == task.dueDate|date('Ymd') or due_date_filter == 'all' %}
-                                    {{ include('task/_tasks.html.twig') }}
-                                    <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
+                                    {% if task.done  == done_filter or done_filter == 'all' %}
+                                        {{ include('task/_tasks.html.twig') }}
+                                        <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
+                                    {% endif %}
                                 {% endif %}
                             {% endfor %}
                         {% endif %}
@@ -70,17 +92,11 @@
                 </form>
             </div>
             <div class="px-3 py-2 bg-tertiary d-flex justify-content-space-between align-items-center">
-                <a class="btn btn-primary px-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
-                    </svg>
+                <a href="{{ route('task/new') }}" class="btn btn-primary px-2">
                     Neu
                 </a>
-                <button form="tasks_form" type="submit" class="btn btn-danger">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                    </svg>
+                <button form="tasks_form" id="task_delete" type="submit" class="btn btn-danger disabled">
+                    Löschen
                 </button>
             </div>
         </div>
@@ -104,6 +120,35 @@
                         console.log('form submitted');
                     }, false)
                 })
+
+            let $submitButton = document.querySelector('#task_delete');
+            let $formInputFields = document.querySelectorAll('.checkbox-action');
+
+            Array.prototype.slice.call($formInputFields)
+                .forEach(function ($field) {
+                    let $i = 0;
+                    addMultipleEventListener($field,['click',''],validateForm)
+                })
+
+            function addMultipleEventListener(element, events, handler) {
+                events.forEach(e => element.addEventListener(e, handler))
+            }
+
+            function validateForm($i){
+                Array.prototype.slice.call($formInputFields)
+                    .forEach(function ($field) {
+                        if($field.checked === true){
+                            $i = 1;
+                        }
+                    })
+                if($i === 1){
+                    $submitButton.classList.remove('disabled');
+                    $submitButton.removeAttribute('disabled');
+                } else {
+                    $submitButton.classList.add('disabled');
+                    $submitButton.setAttribute('disabled','disabled')
+                }
+            }
 
         })();
     </script>

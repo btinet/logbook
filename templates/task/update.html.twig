@@ -1,0 +1,67 @@
+{% extends 'app.html.twig' %}
+
+{% block content %}
+    <div class="container my-3">
+        <div class="mx-auto bg-light border border-color-dark shadow-sm">
+            <div class="body mb-3">
+                <h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-task" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"/>
+                        <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"/>
+                        <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"/>
+                    </svg>
+                    <span>Aufgabe bearbeiten</span>
+                </h2>
+                <p class="mb-1">Bearbeite die Aufgabe oder schließe sie ab.</p>
+                <hr>
+                <form id="task_create_form" method="post" class="row row-sm-1 row-md-1 row-lg-1 row-lg-1 mb-0 needs-validation" novalidate>
+                    <div>
+                        <label for="description">Beschreibung</label>
+                        <input type="text" name="description" id="description" class="input" value="{{ task.description|default('') }}" placeholder="Beschreibung" autofocus required="required" aria-required="true">
+                        <div class="invalid-feedback">
+                            {{ trans["input"]["tag_name"]["empty"] }}
+                        </div>
+                    </div>
+                    <div>
+                        <label for="due_date">Erledigen am</label>
+                        <input type="date" name="due_date" id="due_date" class="input" value="{{ task.dueDate|date('Y-m-d')|default(now|date('Y-m-d')) }}" min="{{ now|date('Y-m-d') }}" placeholder="{{ now|date('Y-m-d') }}" required="required" aria-required="true">
+                        <div class="invalid-feedback">
+                            {{ trans["input"]["tag_name"]["empty"] }}
+                        </div>
+                    </div>
+                    <div>
+                        <label for="tag_id">Filtern</label>
+                        <select id="tag_id" name="tag_id" class="input" required aria-required="true">
+                            <option value="">Kategorisieren...</option>
+                            {% for tag in tags %}
+                                <option value="{{ tag.id }}" {% if tag.id == task.tag_id %}selected{% endif %}>{{ tag.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="invalid-feedback">
+                            {{ trans["input"]["tag_name"]["empty"] }}
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-start align-items-center mt-3">
+                        <label for="notice_user" class="switch switch-primary">
+                            <input type="checkbox" name="notice_user" class="checkbox-action" {% if true == task.notice_user %}checked aria-checked="true"{% endif %} id="notice_user" value="true">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="ms-2 small">An Aufgabe per E-Mail erinnern?</span>
+                    </div>
+                    <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
+                </form>
+            </div>
+            <div class="px-3 py-2 bg-tertiary d-flex justify-content-space-between">
+                <div>
+                    <button form="task_create_form" type="submit" class="btn btn-primary">{{ trans["button"]["submit"]["save"] }}</button>
+                    <a href="{{ route('task') }}" class="btn btn-light text-dark">{{ trans["button"]["submit"]["abort"] }}</a>
+                </div>
+                <form id="task_done_form" method="post" action="{{ route("task/#{task.id}/done") }}">
+                    <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
+                    <button type="submit" value="submit"  class="btn btn-success">Erledigt</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
