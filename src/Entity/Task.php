@@ -16,12 +16,30 @@ class Task
      */
     public DateTime $dueDate;
 
+    /**
+     * @var int
+     */
     public int $user_id;
+
+    /**
+     * @var int
+     */
+    public int $tag_id;
 
     /**
      * @var string
      */
     public string $description;
+
+    /**
+     * @var bool
+     */
+    public bool $notice_user;
+
+    /**
+     * @var bool
+     */
+    public bool $done;
 
 
     /**
@@ -75,7 +93,7 @@ class Task
     /**
      * @return int
      */
-    public function getUserId(): int
+    public function getUser_id(): int
     {
         return $this->user_id;
     }
@@ -83,9 +101,57 @@ class Task
     /**
      * @param int $user_id
      */
-    public function setUserId(int $user_id): void
+    public function setUser_id(int $user_id): void
     {
         $this->user_id = $user_id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTag_id(): int
+    {
+        return $this->tag_id;
+    }
+
+    /**
+     * @param int $tag_id
+     */
+    public function setTag_id(int $tag_id): void
+    {
+        $this->tag_id = $tag_id;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getNotice_user(): bool
+    {
+        return $this->notice_user;
+    }
+
+    /**
+     * @param bool $notice_user
+     */
+    public function setNotice_user(bool $notice_user): void
+    {
+        $this->notice_user = $notice_user;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDone(): bool
+    {
+        return $this->done;
+    }
+
+    /**
+     * @param bool $done
+     */
+    public function setDone(bool $done): void
+    {
+        $this->done = $done;
     }
 
 }
