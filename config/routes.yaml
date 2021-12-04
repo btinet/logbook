@@ -12,6 +12,27 @@ task_index:
   method: 'index'
   request: ['get','post']
 
+task_new:
+  expression: '/task/new'
+  value:
+  controller: 'App\Controller\TaskController'
+  method: 'new'
+  request: ['get','post']
+
+task_update:
+  expression: '/task/([0-9]*)/update'
+  value:  'id'
+  controller: 'App\Controller\TaskController'
+  method: 'update'
+  request: ['get','post']
+
+task_done:
+  expression: '/task/([0-9]*)/done'
+  value:  'id'
+  controller: 'App\Controller\TaskController'
+  method: 'done'
+  request: 'post'
+
 task_delete:
   expression: '/task/delete'
   value:
