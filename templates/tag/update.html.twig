@@ -15,7 +15,7 @@
                 <form id="tag_create_form" method="post" class="row row-sm-1 row-md-1 row-lg-1 row-lg-1 mb-0 needs-validation" novalidate>
                     <div>
                         <label for="name">Tag-Name</label>
-                        <input type="text" name="name" id="name" class="input" value="{{ tag.name|default('') }}" placeholder="Tag-Name" required="required" aria-required="true">
+                        <input type="text" name="name" id="name" class="input" value="{{ tag.name|default('') }}" placeholder="Tag-Name" autofocus required="required" aria-required="true">
                         <div class="invalid-feedback">
                             {{ trans["input"]["tag_name"]["empty"] }}
                         </div>
