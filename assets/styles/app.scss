@@ -108,13 +108,30 @@ $input-box-shadow: none;
   transition: .1s;
 }
 
-input:checked + .slider {
-  background-color: map-get($theme-colors,'danger');
+
+
+@each $name, $value in $theme-colors {
+  .switch-#{$name} {
+    input:checked + .slider {
+      background-color: $value;
+    }
+    input:focus + .slider {
+      box-shadow: 0 0 0  $value;
+    }
+  }
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 0  map-get($theme-colors,'primary');
+.task-done{
+  background-color: $gray-18-100!important;
+  color: $gray-300!important;
+  font-weight: 100!important;
+  svg{
+    fill: map-get($theme-colors,'success')!important;
+  }
+  cursor: default!important;
 }
+
+
 
 input:checked + .slider:before {
   -webkit-transform: translateX(2em);
