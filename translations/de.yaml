@@ -1,6 +1,8 @@
 200: Aktion war erfolgreich.
 201: Login erfolgreich.
 202: Tag wurde gespeichert.
+203: Aufgabe wurde gespeichert.
+204:  Aufgabe wurde abgeschlossen.
 
 400: Bitte einloggen, um auf die Ressource zuzugreifen.
 401: Du besitzt nicht die erforderlichen Berechtigungen.
