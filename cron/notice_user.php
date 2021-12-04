@@ -4,11 +4,11 @@ use App\Database;
 
 require_once dirname(__DIR__).'/vendor/autoload.php';
 
-$_ENV['DB_TYPE'] = 'mysql';
-$_ENV['DB_HOST'] = 'localhost';
-$_ENV['DB_NAME'] = 'logbook_db';
-$_ENV['DB_USER'] = 'root';
-$_ENV['DB_PASS'] = '';
+$env = Spyc::YAMLLoad(dirname(__DIR__).'/config/env.yaml');
+foreach ($env as $key => $value)
+{
+    $_ENV[$key] = $value;
+}
 
 $from = "From: Benjamin Wagner <service@wagnerpictures.com>";
 $db = new Database();
