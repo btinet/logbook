@@ -98,9 +98,9 @@ class TaskController extends AbstractController
             $task->setTag_id($this->request->post('tag_id'));
             $task->setDueDate($dueDate);
             if($this->request->post('notice_user')){
-                $task->setNotice_user(1);
+                $task->setNotice_user('1');
             } else {
-                $task->setNotice_user(false);
+                $task->setNotice_user('0');
             }
             $em = $this->getEntityManager();
             $em->persist($task);
@@ -150,9 +150,9 @@ class TaskController extends AbstractController
                     $dueDate = new DateTime($this->request->post('due_date'));
                     $task->setDueDate($dueDate);
                     if($this->request->post('notice_user')){
-                        $task->setNotice_user(1);
+                        $task->setNotice_user('1');
                     } else {
-                        $task->setNotice_user(false);
+                        $task->setNotice_user('0');
                     }
                     $em = $this->getEntityManager();
                     $em->persist($task,$id);
