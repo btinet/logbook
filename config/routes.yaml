@@ -5,6 +5,13 @@ app_index:
   method:     'index'
   request:    'get'
 
+app_impressum:
+  expression: '/imprint'
+  value:
+  controller: 'App\Controller\AppController'
+  method:     'imprint'
+  request:    'get'
+
 task_index:
   expression: '/task'
   value:
