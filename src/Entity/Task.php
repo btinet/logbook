@@ -32,9 +32,9 @@ class Task
     public string $description;
 
     /**
-     * @var bool
+     * @var int
      */
-    public bool $notice_user;
+    public int $notice_user;
 
     /**
      * @var bool
@@ -123,17 +123,17 @@ class Task
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function getNotice_user(): bool
+    public function getNotice_user(): int
     {
         return $this->notice_user;
     }
 
     /**
-     * @param bool $notice_user
+     * @param int $notice_user
      */
-    public function setNotice_user(bool $notice_user): void
+    public function setNotice_user(int $notice_user): void
     {
         $this->notice_user = $notice_user;
     }
