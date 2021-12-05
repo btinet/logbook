@@ -1,10 +1,13 @@
 <?php
 
-use App\Database;
+namespace cron;
 
-require_once dirname(__DIR__).'/vendor/autoload.php';
+require_once('secret.php');
+require_once('Database.php');
 
-$env = Spyc::YAMLLoad(dirname(__DIR__).'/config/env.yaml');
+$secret = new secret();
+$env = $secret->getSecret();
+
 foreach ($env as $key => $value)
 {
     $_ENV[$key] = $value;
