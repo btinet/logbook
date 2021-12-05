@@ -97,7 +97,9 @@ class TaskController extends AbstractController
             $task->setUser_id($this->session->get('user'));
             $task->setTag_id($this->request->post('tag_id'));
             $task->setDueDate($dueDate);
-            $task->setNotice_user($this->request->post('notice_user'));
+            if($this->request->post('notice_user')){
+                $task->setNotice_user(1);
+            }
             $em = $this->getEntityManager();
             $em->persist($task);
             $this->setFlash(203);
