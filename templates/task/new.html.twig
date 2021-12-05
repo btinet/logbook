@@ -19,14 +19,14 @@
                         <label for="description">Beschreibung</label>
                         <input type="text" name="description" id="description" class="input" value="{{ task.description|default('') }}" placeholder="Beschreibung" autofocus required="required" aria-required="true">
                         <div class="invalid-feedback">
-                            {{ trans["input"]["tag_name"]["empty"] }}
+                            {{ trans["input"]["description"]["empty"] }}
                         </div>
                     </div>
                     <div>
                         <label for="due_date">Erledigen am</label>
                         <input type="date" name="due_date" id="due_date" class="input" value="{{ task.dueDate|default(now|date('Y-m-d')) }}" min="{{ now|date('Y-m-d') }}" placeholder="{{ now|date('Y-m-d') }}" required="required" aria-required="true">
                         <div class="invalid-feedback">
-                            {{ trans["input"]["tag_name"]["empty"] }}
+                            {{ trans["input"]["due_date"]["empty"] }}
                         </div>
                     </div>
                     <div>
