@@ -100,7 +100,7 @@ class TaskController extends AbstractController
             if($this->request->post('notice_user')){
                 $task->setNotice_user(1);
             } else {
-                $task->setNotice_user(0);
+                $task->setNotice_user(false);
             }
             $em = $this->getEntityManager();
             $em->persist($task);
@@ -152,7 +152,7 @@ class TaskController extends AbstractController
                     if($this->request->post('notice_user')){
                         $task->setNotice_user(1);
                     } else {
-                        $task->setNotice_user(0);
+                        $task->setNotice_user(false);
                     }
                     $em = $this->getEntityManager();
                     $em->persist($task,$id);
