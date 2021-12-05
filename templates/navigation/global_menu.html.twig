@@ -1,4 +1,6 @@
 <ul class="navbar-nav d-flex align-items-center">
+    {% if session.get('user') %}
     <li><a href="{{ route('task') }}" class="btn btn-dark {% if active_section == 'task' %}active{% endif %}">{{ trans["nav"]["action"]["tasks"] }}</a></li>
     <li><a href="{{ route('tag') }}" class="btn btn-dark {% if active_section == 'tag' %}active{% endif %}">{{ trans["nav"]["action"]["tags"] }}</a></li>
+    {% endif %}
 </ul>
