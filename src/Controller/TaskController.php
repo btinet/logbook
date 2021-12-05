@@ -11,6 +11,18 @@ use ReflectionException;
 
 class TaskController extends AbstractController
 {
+    protected string $active_section;
+
+    /**
+     * @throws ReflectionException
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->active_section = 'task';
+
+    }
+
     /**
      * @throws ReflectionException
      */
@@ -52,6 +64,7 @@ class TaskController extends AbstractController
         ]);
 
         return $this->render('task/index.html.twig',[
+            'active_section' => $this->active_section,
             'flash' => $this->getFlash(),
             'tasks' => $tasks,
             'tags' => $tags,
@@ -92,6 +105,7 @@ class TaskController extends AbstractController
         }
 
         return $this->render('task/new.html.twig',[
+            'active_section' => $this->active_section,
             'flash' => $this->getFlash(),
             'title' => 'TMA - Neue Task erstellen',
             'tags' => $tags,
@@ -139,6 +153,7 @@ class TaskController extends AbstractController
                 }
 
                 return $this->render('task/update.html.twig',[
+                    'active_section' => $this->active_section,
                     'flash' => $this->getFlash(),
                     'title' => 'TMA - Neue Task erstellen',
                     'tags' => $tags,

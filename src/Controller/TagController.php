@@ -8,6 +8,18 @@ use ReflectionException;
 
 class TagController extends AbstractController
 {
+    protected string $active_section;
+
+    /**
+     * @throws ReflectionException
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->active_section = 'tag';
+
+    }
+
     /**
      * @throws ReflectionException
      */
@@ -18,6 +30,7 @@ class TagController extends AbstractController
         'user' => $this->session->get('user'),
     ]);
         return $this->render('tag/index.html.twig',[
+            'active_section' => $this->active_section,
             'flash' => $this->getFlash(),
             'tags' => $tags,
             'title' => 'TMA - Meine Tags'
@@ -42,6 +55,7 @@ class TagController extends AbstractController
         }
 
         return $this->render('tag/new.html.twig',[
+            'active_section' => $this->active_section,
             'flash' => $this->getFlash(),
             'title' => 'TMA - Neuen Tag erstellen'
         ]);
@@ -74,6 +88,7 @@ class TagController extends AbstractController
         }
 
         return $this->render('tag/update.html.twig',[
+            'active_section' => $this->active_section,
             'flash' => $this->getFlash(),
             'title' => 'TMA - Tag bearbeiten',
             'tag' => $tag
