@@ -10,7 +10,7 @@ foreach ($env as $key => $value)
     $_ENV[$key] = $value;
 }
 
-$from = "From: Benjamin Wagner <service@wagnerpictures.com>";
+$from = "From: ".$_ENV['EMAIL_SENDER_NAME']." <".$_ENV['EMAIL_SENDER_ADDRESS'].">";
 $db = new Database();
 $now = date('Y-m-d H:i:s',strtotime('now'));
 $dayAfterTomorrow = date('Y-m-d H:i',strtotime('+2 days'));
