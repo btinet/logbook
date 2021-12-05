@@ -15,50 +15,57 @@
                 <p class="mb-1">Füge Aufgaben hinzu und behalte immer den Überblick.</p>
                 <div class="">
                     <form method="post" class="row row-sm-1 row-md-1 row-lg-3 row-xl-3">
-                        <div style="position: relative">
-                            <div class="text-muted" style="position: absolute;left: 5px;top:9px">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
-                                    <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
-                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                                </svg>
+                        <div>
+                            <div class="pb-1 small">Datum filtern:</div>
+                            <div style="position: relative">
+                                <div class="text-muted" style="position: absolute;left: 5px;top:9px">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
+                                        <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
+                                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                                    </svg>
+                                </div>
+                                <label for="filter_due_date">Filtern</label>
+                                <select id="filter_due_date" name="due_date_filter" class="input filter_form">
+                                    <option value="all" {% if not due_date_filter %}selected{% endif %}>alle</option>
+                                    {% for key, value in due_dates %}
+                                        <option value="{{ value }}" {% if due_date_filter == value %}selected{% endif %}>{{ key }}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
-                            <label for="filter_due_date">Filtern</label>
-                            <select id="filter_due_date" name="due_date_filter" class="input filter_form">
-                                <option value="all" {% if not due_date_filter %}selected{% endif %}>alle</option>
-                                {% for key, value in due_dates %}
-                                    <option value="{{ value }}" {% if due_date_filter == value %}selected{% endif %}>{{ key }}</option>
-                                {% endfor %}
-                            </select>
                         </div>
-
-                        <div style="position: relative">
-                            <div class="text-muted" style="position: absolute;left: 5px;top:9px">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tag-fill" viewBox="0 0 16 16">
-                                    <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                                </svg>
+                        <div>
+                            <div class="pb-1 small">Tags filtern:</div>
+                            <div style="position: relative">
+                                <div class="text-muted" style="position: absolute;left: 5px;top:9px">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tag-fill" viewBox="0 0 16 16">
+                                        <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                    </svg>
+                                </div>
+                                <label for="filter_tags">Filtern</label>
+                                <select id="filter_tags" name="tag_filter" class="input filter_form">
+                                    <option value="all" {% if not tag_filter %}selected{% endif %}>alle</option>
+                                    {% for tag in tags %}
+                                        <option value="{{ tag.id }}" {% if tag_filter == tag.id %}selected{% endif %}>{{ tag.name }}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
-                            <label for="filter_tags">Filtern</label>
-                            <select id="filter_tags" name="tag_filter" class="input filter_form">
-                                <option value="all" {% if not tag_filter %}selected{% endif %}>alle</option>
-                                {% for tag in tags %}
-                                    <option value="{{ tag.id }}" {% if tag_filter == tag.id %}selected{% endif %}>{{ tag.name }}</option>
-                                {% endfor %}
-                            </select>
                         </div>
-
-                        <div style="position: relative">
-                            <div class="text-muted" style="position: absolute;left: 5px;top:9px">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-square" viewBox="0 0 16 16">
-                                    <path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z"/>
-                                    <path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
-                                </svg>
-                            </div>
-                            <label for="filter_done">Filtern</label>
-                            <select id="filter_done" name="done_filter" class="input filter_form">
-                                <option value="all" {% if done_filter == 'all' %}selected="selected"{% endif %}>alle</option>
+                        <div>
+                            <div class="pb-1 small">Status filtern:</div>
+                            <div style="position: relative">
+                                <div class="text-muted" style="position: absolute;left: 5px;top:9px">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-square" viewBox="0 0 16 16">
+                                        <path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z"/>
+                                        <path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+                                    </svg>
+                                </div>
+                                <label for="filter_done">Filtern</label>
+                                <select id="filter_done" name="done_filter" class="input filter_form">
+                                    <option value="all" {% if done_filter == 'all' %}selected="selected"{% endif %}>alle</option>
                                     <option value="0" {% if done_filter !=1 and done_filter != 'all' %}selected="selected"{% endif %}>unerledigt</option>
                                     <option value="1" {% if done_filter == 1 %}selected="selected"{% endif %}>erledigt</option>
-                            </select>
+                                </select>
+                            </div>
                         </div>
                     </form>
                 </div>
