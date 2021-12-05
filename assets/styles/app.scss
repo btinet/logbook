@@ -872,6 +872,10 @@ a:not([class]){
       }
     }
   }
+  .active{
+    background-color: map-get($theme-colors,'secondary');
+    color: map-get($theme-colors,'dark');
+  }
 }
 
 .img-fluid {
