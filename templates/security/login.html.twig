@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token }}">
-                    <p class="small">Mit Klick auf <span class="text-emphasised">{{ trans["button"]["submit"]["login"] }}</span> erklärst du dich mit den <a href="#">Nutzungsbedingungen</a> einverstanden.</p>
+                    <p class="small">Mit Klick auf <span class="text-emphasised">{{ trans["button"]["submit"]["login"] }}</span> erklärst du dich mit den <a href="{{ route('terms') }}">Nutzungsbedingungen</a> einverstanden.</p>
                 </form>
             </div>
             <div class="px-3 py-2 bg-tertiary">

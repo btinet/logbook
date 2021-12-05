@@ -12,6 +12,13 @@ app_impressum:
   method:     'imprint'
   request:    'get'
 
+app_tos:
+  expression: '/terms'
+  value:
+  controller: 'App\Controller\AppController'
+  method:     'tos'
+  request:    'get'
+
 task_index:
   expression: '/task'
   value:

@@ -25,4 +25,12 @@ class AppController extends AbstractController
         ]);
     }
 
+    public function tos(): string
+    {
+        return $this->render('app/terms_of_use.html.twig',[
+            'flash' => $this->getFlash(),
+            'title' => 'TMA - Nutzungsbedingungen'
+        ]);
+    }
+
 }

@@ -1,0 +1,21 @@
+{% extends 'app.html.twig' %}
+
+{% block content %}
+    <div class="container my-3">
+        <div class="mx-auto bg-light border border-color-dark shadow-sm">
+            <div class="body mb-3">
+                <h2>
+                    <span>Impressum</span>
+                </h2>
+                <p>
+                    Diese Website wurde im Rahmen des Schulunterrichts im Fach Informatik entworfen.
+                    Für alle eingegebenen Daten kann die Sicherheit nicht garantiert werden.
+                    Dennoch wurde bei der Entwicklung großen Wert auf die sichere Verarbeitung der verwendeten Daten gelegt.
+                    Datenbankpasswörter beispielsweise liegen in nicht öffentlichen Verzeichnissen auf dem Server.
+                    Darüber hinaus werden Benutzerpasswörter verschlüsselt in der Datenbank gespeichert.
+                </p>
+                <p>
+                    Wenden Sie sich bitte bei Verdacht auf Sicherheitsprobleme an die im <a href="{{ route('imprint') }}">Impressum</a> hinterlegte E-Mail-Adresse.
+                </p>
+    </div>
+{% endblock %}
