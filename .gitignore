@@ -1,4 +1,5 @@
 /var/
 /config/env.yaml
+/cron/secret.php
 /vendor/
 /public/styles/
