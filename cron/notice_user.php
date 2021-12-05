@@ -24,8 +24,8 @@ if($tasks)
     foreach ($tasks as $task) {
         if(!$task['email_sent']) {
             $receiver = $task['email'];
-            $subject = "Eine Aufgabe steht für morgen an! ";
-            $text = "Denke an folgende Aufgabe für morgen:\n\n". $task['description'];
+            $subject = "Eine Aufgabe steht f&uuml;r morgen an! ";
+            $text = "Denke an folgende Aufgabe f&uuml;r morgen:\n\n". $task['description'];
             mail($receiver, $subject, $text, $from);
             $db->update("task", ['email_sent' => 1], ['id' => $task['id']]);
         }
