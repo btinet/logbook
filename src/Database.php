@@ -9,6 +9,7 @@ class Database extends PDO {
 
     function __construct() {
         try {
+
             parent::__construct(
                 $_ENV['DB_TYPE'].':host='.$_ENV['DB_HOST'].';dbname='.$_ENV['DB_NAME'].';charset=utf8',
                 $_ENV['DB_USER'],
