@@ -51,6 +51,11 @@ input:
     empty:  Bitte Nachnamen angeben!
   tag_name:
     empty:  Bitte Tag-Namen angeben!
+  description:
+    empty:  Bitte Beschreibung angeben!
+  due_date:
+    empty:  Bitte Erledigungsdatum benennen!
+
 
 button:
   submit:
