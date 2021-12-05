@@ -22,7 +22,6 @@ class Bootstrap
         {
             $_ENV[$key] = $value;
         }
-        print_r($_ENV);
     }
 
     /**
