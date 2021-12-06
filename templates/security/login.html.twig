@@ -25,15 +25,15 @@
                 <span>Einloggen, um fortzusetzen.</span>
                 <form id="login_form" method="post" class="row row-sm-1 row-md-1 row-lg-1 row-lg-1 mb-0 needs-validation" novalidate>
                     <div>
-                        <label for="username">Benutzername</label>
-                        <input type="text" name="username" id="username" class="input" value="{{ user.username|default('') }}" placeholder="Benutzername" required="required" aria-required="true">
+                        <label for="username">{{ trans["input"]["user"]["label"] }}</label>
+                        <input type="text" name="username" id="username" class="input" value="{{ user.username|default('') }}" placeholder="{{ trans["input"]["user"]["label"] }}" required="required" aria-required="true">
                         <div class="invalid-feedback">
                             {{ trans["input"]["user"]["empty"] }}
                         </div>
                     </div>
                     <div>
-                        <label for="password">Passwort</label>
-                        <input type="password" name="password" id="password" class="input" value="{{ user.password|default('') }}" placeholder="Passwort" required="required" aria-required="true">
+                        <label for="password">{{ trans["input"]["password"]["label"] }}</label>
+                        <input type="password" name="password" id="password" class="input" value="{{ user.password|default('') }}" placeholder="{{ trans["input"]["password"]["label"] }}" required="required" aria-required="true">
                         <div class="invalid-feedback">
                             {{ trans["input"]["password"]["empty"] }}
                         </div>

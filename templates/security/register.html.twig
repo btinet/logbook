@@ -25,43 +25,43 @@
                 <span>Registrieren und Teil der Community werden.</span>
                 <form id="register_form" method="post" class="row row-sm-1 row-md-1 row-lg-1 row-lg-1 needs-validation" novalidate>
                     <div>
-                        <label for="email">E-Mail-Adresse</label>
-                        <input type="text" name="email" id="email" class="input" value="{{ user.email|default('') }}" placeholder="E-Mail-Adresse" required="required" aria-required="true">
+                        <label for="email">{{ trans["input"]["email"]["label"] }}</label>
+                        <input type="text" name="email" id="email" class="input" value="{{ user.email|default('') }}" placeholder="{{ trans["input"]["email"]["label"] }}" required="required" aria-required="true">
                         <div class="invalid-feedback">
                             {{ trans["input"]["email"]["empty"] }}
                         </div>
                     </div>
                     <div>
-                        <label for="username">Benutzername</label>
-                        <input type="text" name="username" id="username" class="input" value="{{ user.username|default('') }}" placeholder="Benutzername" required="required" aria-required="true">
+                        <label for="username">{{ trans["input"]["user"]["label"] }}</label>
+                        <input type="text" name="username" id="username" class="input" value="{{ user.username|default('') }}" placeholder="{{ trans["input"]["user"]["label"] }}" required="required" aria-required="true">
                         <div class="invalid-feedback">
                             {{ trans["input"]["user"]["empty"] }}
                         </div>
                     </div>
                     <div>
-                        <label for="password_a">Passwort</label>
-                        <input type="password" name="password_a" id="password_a" class="input" value="{{ user.password_a|default('') }}" placeholder="Passwort" required="required" aria-required="true">
+                        <label for="password_a">{{ trans["input"]["password"]["label"] }}</label>
+                        <input type="password" name="password_a" id="password_a" class="input" value="{{ user.password_a|default('') }}" placeholder="{{ trans["input"]["password"]["label"] }}" required="required" aria-required="true">
                         <div class="invalid-feedback">
                             {{ trans["input"]["password"]["empty"] }}
                         </div>
                     </div>
                     <div>
-                        <label for="password_b">Passwort wiederholen</label>
-                        <input type="password" name="password_b" id="password_b" class="input" value="{{ user.password_b|default('') }}" placeholder="Passwort wiederholen" required="required" aria-required="true">
+                        <label for="password_b">{{ trans["input"]["password_retype"]["label"] }}</label>
+                        <input type="password" name="password_b" id="password_b" class="input" value="{{ user.password_b|default('') }}" placeholder="{{ trans["input"]["password_retype"]["label"] }}" required="required" aria-required="true">
                         <div class="invalid-feedback">
                             {{ trans["input"]["password_retype"]["empty"] }}
                         </div>
                     </div>
                     <div>
-                        <label for="firstname">Vorname</label>
-                        <input type="text" name="firstname" id="firstname" class="input" value="{{ user.firstname|default('') }}" placeholder="Vorname" required="required" aria-required="true">
+                        <label for="firstname">{{ trans["input"]["firstname"]["label"] }}</label>
+                        <input type="text" name="firstname" id="firstname" class="input" value="{{ user.firstname|default('') }}" placeholder="{{ trans["input"]["firstname"]["label"] }}" required="required" aria-required="true">
                         <div class="invalid-feedback">
                             {{ trans["input"]["firstname"]["empty"] }}
                         </div>
                     </div>
                     <div>
-                        <label for="lastname">Nachname</label>
-                        <input type="text" name="lastname" id="lastname" class="input" value="{{ user.lastname|default('') }}" placeholder="Nachname" required="required" aria-required="true">
+                        <label for="lastname">{{ trans["input"]["lastname"]["label"] }}</label>
+                        <input type="text" name="lastname" id="lastname" class="input" value="{{ user.lastname|default('') }}" placeholder="{{ trans["input"]["lastname"]["label"] }}" required="required" aria-required="true">
                         <div class="invalid-feedback">
                             {{ trans["input"]["lastname"]["empty"] }}
                         </div>
