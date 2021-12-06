@@ -25,16 +25,20 @@ class Bootstrap
     }
 
     /**
-     * @throws \Exception
+     * @param $class
+     * @param $method
+     * @param $mandatory
+     * @return mixed
+     * @throws Exception
      */
-    private function runControllerMethod($class, $method, $mandatory = false)
+    private function runControllerMethod($class, $method, $mandatory = null)
     {
         if (!class_exists($class)) {
-            throw new \Exception('Class not found.');
+            throw new Exception('Class not found.');
         } else {
             $class = new $class;
             if(!method_exists($class,$method)) {
-                throw new \Exception('Method not found.');
+                throw new Exception('Method not found.');
             } else {
                 return $class->$method($mandatory);
             }
@@ -49,7 +53,7 @@ class Bootstrap
             {
                 $this->routing->add($route['expression'], function ($id) use ($route) {
                     try {
-                        return $this->runControllerMethod($route['controller'],$route['method'],$id);
+                        return $this->runControllerMethod($route['controller'], $route['method'], $id);
                     } catch (Exception $e) {
                         return 'Exception abgefangen: '. $e->getMessage() . "\n";
                     }
@@ -57,7 +61,7 @@ class Bootstrap
             } else {
                 $this->routing->add($route['expression'], function () use ($route) {
                     try {
-                        return $this->runControllerMethod($route['controller'],$route['method']);
+                        return $this->runControllerMethod($route['controller'], $route['method']);
                     } catch (Exception $e) {
                         return 'Exception abgefangen: '. $e->getMessage() . "\n";
                     }
