@@ -1,75 +1,82 @@
-200: Aktion war erfolgreich.
-201: Login erfolgreich.
-202: Tag wurde gespeichert.
+200: Operation successful.
+201: login successful.
+202: Tag has been saved.
 
-400: Bitte einloggen, um auf die Ressource zuzugreifen.
-401: Du besitzt nicht die erforderlichen Berechtigungen.
-402:  Du hast keine Elemente ausgewählt.
+400: Please login to gain access to this resource.
+401: You do not have the needed permission.
+402:  No elements were selected.
 
-411:  Tag wurde nicht gefunden.
-412:  Task wurde nicht gefunden.
+411:  Tag not found.
+412:  Task not found.
 
-1601: Passwort ist keine Zeichenkette.
-1602: Passwörter stimmen nicht überein.
-1603: Passwort ist nicht lang genug.
-1604: Passwort verwendet unerlaubte Zeichen.
+1601: Password has to be a string.
+1602: Passwords are not equal.
+1603: Password is not long enaugh.
+1604: Password uses unallowed characters.
 
-16051:  Passwort enthält zu viele Leerzeichen.
-16052:  Passwort enthält keine Großbuchstaben.
-16053:  Passwort enthält keine Kleinbuchstaben.
-16054:  Passwort enthält keine Sonderzeichen.
-16055:  Passwort enthält keine Ziffern.
+16051:  Password contains to much spaces.
+16052:  Password does not contain any upper letters.
+16053:  Password does not contain any lower letters.
+16054:  Password does not contain any special characters.
+16055:  Password does not contain any numbers.
 
 
-21011:  Benutzername existiert bereits.
-210111: Benutzer nicht gefunden.
-210112: Benutzer und Passwort stimmen nicht überein.
+21011:  User already exists.
+210111: User not found.
+210112: user and password do not match.
 
-21012: E-Mail-Adresse existiert bereits.
+21012: Email address already exists.
 
-21022:  E-Mail-Adresse ist nicht gültig.
+21022:  Email address is not valid.
 
-21031:  Benutzername ist keine Zeichenkette.
-21034:  Vorname ist keine Zeichenkette.
-21035:  Nachname ist keine Zeichenkette.
+21031:  username has to be a string.
+21034:  Firstname has to be a string.
+21035:  Lastname has to be a string.
 
 
 input:
   user:
-    empty:  Bitte Benuternamen angeben!
+    empty:  Please enter your username!
+    label: user
   password:
-    empty:  Bitte Passwort angeben!
+    empty:  Please enter your password!
+    label: password
   password_retype:
-    empty:  Bitte Passwort wiederholen!
+    empty:  Please reenter your password!
+    label: retype password
   email:
-    empty:  Bitte E-Mail-Adresse angeben!
+    empty:  Please enter your email address!
+    label: email address
   firstname:
-    empty:  Bitte Vornamen angeben!
+    empty:  Please enter your firstname!
+    label: firstname
   lastname:
-    empty:  Bitte Nachnamen angeben!
+    empty:  Please enter your lastname!
+    label: lastname
   tag_name:
-    empty:  Bitte Tag-Namen angeben!
+    empty: Please enter a tag name!
+    label: tag name
 
 button:
   submit:
-    login:  Einloggen
-    register: Registrieren
-    save: Speichern
-    update: Aktualisieren
+    login:  login
+    register: register
+    save: save
+    update: update
     abort: abort
 
 nav:
   action:
-    login:  Login
-    signup: Registrieren
-    logbook:  Klassenbuch
-    grades: Noten
-    semesters: Semester
+    login:  login
+    signup: register
+    logbook:  logbook
+    grades: grades
+    semesters: semesters
     tasks: Tasks
     tags: Tags
 
 title:
-  login:  Anmelden
-  logout: Tschüss!
-  signup: Registrieren
-  semesters: Semester
+  login:  login
+  logout: goodbye!
+  signup: register
+  semesters: semesters
