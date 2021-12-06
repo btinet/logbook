@@ -1,31 +1,54 @@
-# logbook
+# Informatikprojekt E-Phase E1
 Digitale Aufgabenverwaltung mit Erinnerungsfunktion.
 
-## Zusammenfassung
+## Anforderungsdefinition
 Im Rahmen des Schulunterrichts im Fach Informatik soll eine Website mit folgenden Anforderungen erstellt werden:
+
+1. Verwendung von mindestens HTML, CSS und Javascript
+2. Muss eine Navigation enthalten
+3. Mindestens vier Unterseiten
+4. Sinnvolle Ordnerstruktur
+5. Mindestens ein Algorithmus
 
 ## Strukturkonzept
 Die Website wurde nach dem MVC-Muster erstellt (Model-View-Controller) und ist weitestgehend objektorientiert. Derzeit werden noch die
-Datenbankentitäten als Arrays an den Controller übergeben.
+Datenbank-Entitäten als Arrays an den Controller übergeben.
 
-## Verwendete Technologien
-
-### HTML
-
-### CSS
-
-### PHP
-
-### Javascript
-
-### SQL
+## Dokumentation
+1. Ordnerstruktur
+2. Anwendungskern
+   1. Einstiegspunkt
+   2. Routing
+3. Controller
+   1. Plain
+   2. Abstrakte Controller-Klasse
+      1. Aufbau
+      2. Systemfunktionen
+4. View
+   1. Direkte Ausgabe
+   2. Twig Rendering Engine
+5. Model
+   1. Datenbank
+   2. Entitäten
+      1. speichern
+      2. aktualisieren
+      3. löschen
+      4. leeren
+   3. Repositories
+      1. Allgemeine Abfragen
+      2. spezielle Abfragen
+6. Erweiterungen
+   1. Übersetzungsmodul
+   2. Benutzer-Service
+   3. Passwort-Service
+7. [E-Mail-Benachrichtigung](./Docs/notice.md)
 
 ## Drittanbieter
 - Steampixel/SimpleRouter
 - SPYC/YAML-Loader
 - Symfony/Twig
 
-## Enfernt
+## Entfernt
 - KNP-Time-Bundle (keine Kompatibilität)
 
 ## To-Do
