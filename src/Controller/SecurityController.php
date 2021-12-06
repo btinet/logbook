@@ -5,12 +5,13 @@ namespace App\Controller;
 use App\AbstractController;
 use App\Entity\User;
 use App\Service\UserService;
+use ReflectionException;
 
 class SecurityController extends AbstractController
 {
 
     /**
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function login (): string
     {
@@ -53,7 +54,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function register (): string
     {
@@ -82,8 +83,8 @@ class SecurityController extends AbstractController
                 $user->setFirstname($userInputData['firstname']);
                 $user->setLastname($userInputData['lastname']);
                 $user->setRoles(['ROLE_USER']);
-                $user->setIsActive(true);
-                $user->setIsBlocked(false);
+                $user->setIsActive(1);
+                $user->setIsBlocked(0);
                 $this->getEntityManager()->persist($user);
                 $this->setFlash(200);
                 $this->redirect(302,'login');
@@ -100,7 +101,7 @@ class SecurityController extends AbstractController
 
     /**
      * @throws \Twig\Error\SyntaxError
-     * @throws \ReflectionException
+     * @throws ReflectionException
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\LoaderError
      */

@@ -36,14 +36,14 @@ class User
     public array $roles = [];
 
     /**
-     * @var bool
+     * @var int
      */
-    public bool $isActive;
+    public int $isActive;
 
     /**
-     * @var bool
+     * @var int
      */
-    public bool $isBlocked;
+    public int $isBlocked;
 
     /**
      * @return string
@@ -173,25 +173,25 @@ class User
     }
 
     /**
-     * @param bool $isActive
+     * @param int $isActive
      */
-    public function setIsActive(bool $isActive): void
+    public function setIsActive(int $isActive): void
     {
         $this->isActive = $isActive;
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function getIsBlocked(): bool
+    public function getIsBlocked(): int
     {
         return $this->isBlocked;
     }
 
     /**
-     * @param bool $isBlocked
+     * @param int $isBlocked
      */
-    public function setIsBlocked(bool $isBlocked): void
+    public function setIsBlocked(int $isBlocked): void
     {
         $this->isBlocked = $isBlocked;
     }
