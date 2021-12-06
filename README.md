@@ -4,6 +4,22 @@ Digitale Aufgabenverwaltung mit Erinnerungsfunktion.
 ## Zusammenfassung
 Im Rahmen des Schulunterrichts im Fach Informatik soll eine Website mit folgenden Anforderungen erstellt werden:
 
+## Strukturkonzept
+Die Website wurde nach dem MVC-Muster erstellt (Model-View-Controller) und ist weitestgehend objektorientiert. Derzeit werden noch die
+Datenbankentitäten als Arrays an den Controller übergeben.
+
+## Verwendete Technologien
+
+### HTML
+
+### CSS
+
+### PHP
+
+### Javascript
+
+### SQL
+
 ## Drittanbieter
 - Steampixel/SimpleRouter
 - SPYC/YAML-Loader
