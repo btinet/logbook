@@ -21,3 +21,4 @@ Im Rahmen des Schulunterrichts im Fach Informatik soll eine Website mit folgende
 - Login-Gate für mobile Seiten ausreichend optimieren
 - Overflow der Task-Ansicht für mobile Geräte stoppen (horizontales Scrollen bei overflow)
 - Englischwörterbuch
+- Texte auf der Seite in Abhängigkeit der Systemsprache übersetzen lassen
