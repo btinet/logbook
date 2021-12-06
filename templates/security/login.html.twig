@@ -18,7 +18,8 @@
                             </svg>
                             <span>{{ trans["title"]["login"] }}</span>
                         </h1>
-                        <p>Noch nicht dabei? Jetzt <a href="{{ route('signup') }}">registrieren</a>!</p>
+                        {# TODO: transform texts to translations #}
+                        <p>Noch nicht dabei? Jetzt <a href="{{ route('signup') }}">{{ trans["nav"]["action"]["signup"] }}</a>!</p>
                     </div>
                 </div>
                 <hr>
