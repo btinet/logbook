@@ -4,9 +4,10 @@
 namespace App\Extension\Twig;
 
 
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-class TwigExtension extends \Twig\Extension\AbstractExtension
+class TwigExtension extends AbstractExtension
 {
     private function getHost(): string
     {
@@ -39,7 +40,7 @@ class TwigExtension extends \Twig\Extension\AbstractExtension
         return json_decode($json, true);
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('json_decode', [$this, 'twig_json_decode']),
