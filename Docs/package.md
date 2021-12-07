@@ -126,7 +126,7 @@ EMAIL_SENDER_NAME: Max Mustermann
 Key|Wert|Typ|Beschreibung|
 |---|---|---|---|
 |APP_ENV|development|_string_|caching deaktiviert, Ausgabe aller Fehler|
-| | production|_string_|chaching aktiviert, Unterdrückung der Fehlerausgabe|
+| | production|_string_|caching aktiviert, Unterdrückung der Fehlerausgabe|
 |APP_SECRET| |_string_|wird Session-Werten vorangestellt|
 |DB_TYPE|z.B. 'mysql'|_string_|gibt Datenbank-Treiber an|
 |DB_HOST| |_string_|Host der Datenbank|
