@@ -38,22 +38,31 @@
 
 input:
   user:
+    label: Benutzer
     empty:  Bitte Benuternamen angeben!
   password:
+    label: Passwort
     empty:  Bitte Passwort angeben!
   password_retype:
+    label: Passwort wiederholen
     empty:  Bitte Passwort wiederholen!
   email:
+    label: E-Mail-Adresse
     empty:  Bitte E-Mail-Adresse angeben!
   firstname:
+    label: Vorname
     empty:  Bitte Vornamen angeben!
   lastname:
+    label: Nachname
     empty:  Bitte Nachnamen angeben!
   tag_name:
+    label: Tag-Name
     empty:  Bitte Tag-Namen angeben!
   description:
+    label: Beschreibung
     empty:  Bitte Beschreibung angeben!
   due_date:
+    label: Erledigungsdatum
     empty:  Bitte Erledigungsdatum benennen!
 
 
