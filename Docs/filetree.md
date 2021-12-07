@@ -97,6 +97,7 @@ Hier werden globale Einstellungen vorgenommen, die das gesamte Projekt betreffen
 ### Environment
 Hier werden Entwicklungsmodus, Zugangsdaten, Benutzerklassen und mehr eingestellt.
 ````yaml
+#env.yaml
 APP_ENV:    development
 APP_SECRET: 8a64534074c7c7e226b0c56f8af67bf4
 
@@ -121,3 +122,40 @@ Key|Wert|Typ|Beschreibung|
 |DB_NAME| |_string_|Name der Datenbank|
 |DB_USER| |_string_|Datenbankbenutzer|
 |PASS| |_string_|Benutzerpasswort|
+|USER_ENTITY| |_string_|vollständiger Name der User-Klasse|
+|EMAIL_SENDER_ADDRESS| |_string_|Adresse des Absenders|
+|EMAIL_SENDER_NAME| |_string_|Name des Absenders|
+
+### Routes
+Hier werden die Routen der App festgelegt und welche Controller-Methode aufgerufen werden soll.
+````yaml
+#routes.yaml
+route_name:
+  expression: '/path/to/route/([0-9]*)'
+  value:
+  controller: 'App\Controller\AppController'
+  method: 'index'
+  request: 'get'
+````
+Key|Wert|Typ|Beschreibung|
+|---|---|---|---|
+|route_name|array()|_array_|Key muss eindeutig sein|
+|expression|/path/to/route/([a-d-0-9]*)|_string_|Request-URI der Route, momentan nur eine Variable erlaubt|
+|value|true / false|_bool_|muss true sein, wenn **expression** eine variable enthält|
+|controller||_string_|vollständiger Name der Controller-Klasse|
+|method| |_string_|Name der Controller-Methode|
+|request|get, post,delete ['get','post','delete'] |_string / array_|erlaubte Request-Methode(n)|
+
+### Translation
+Hier werden Entwicklungsmodus, Zugangsdaten, Benutzerklassen und mehr eingestellt.
+````yaml
+#translation.yaml
+0: en
+1: de
+2: fr
+3: es
+````
+Gib für jede verfügbare Sprache das entsprechende ICC-Landeskürzel(2 Zeichen) an.
+Für jede Angabe muss unter ``/translations`` eine Datei mit [ICC].yaml vorhanden sein,
+für Deutschland (de) beispielsweise also die Datei _de.yaml_.
+ 
