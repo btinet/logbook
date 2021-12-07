@@ -16,7 +16,7 @@ Derzeit werden noch die
 Datenbank-Entitäten als Arrays an den Controller übergeben.
 
 ## Dokumentation
-1. [Ordnerstruktur](./Docs/filetree.md)
+1. [Paketinhalt](./Docs/package.md)
 2. Anwendungskern
 3. Controller
 4. View

@@ -1,13 +1,14 @@
-# Ordnerstruktur
+# Projektinhalt
 
-1. [Assets](#assets)
-2. [Config](#config)
-5. [Public Webroot](#public-webroot)
-7. Source
-8. Templates
-9. Translations
+1. [Ordnerstruktur](#ordnerstruktur)
+2. [Assets](#assets)
+3. [Config](#config)
+4. [Public Webroot](#public-webroot)
+5. Source
+6. Templates
+7. Translations
 
-
+## Ordnerstruktur
 Das Projekt teilt sich unter folgender Ordnerstruktur in logische Bereiche auf, die anschließend
 näher erläutert werden.
 ````
@@ -120,13 +121,14 @@ USER_ENTITY: App\Entity\User
 
 EMAIL_SENDER_ADDRESS: name@email.kom
 EMAIL_SENDER_NAME: Max Mustermann
+
 ````
 Key|Wert|Typ|Beschreibung|
 |---|---|---|---|
 |APP_ENV|development|_string_|caching deaktiviert, Ausgabe aller Fehler|
 | | production|_string_|chaching aktiviert, Unterdrückung der Fehlerausgabe|
-|APP_SECRET|development|_string_|wird Session-Werten vorangestellt|
-|DB_TYPE|mysql, maria_db,mongo_db|_string_|gibt Datenbank-Treiber an|
+|APP_SECRET| |_string_|wird Session-Werten vorangestellt|
+|DB_TYPE|z.B. 'mysql'|_string_|gibt Datenbank-Treiber an|
 |DB_HOST| |_string_|Host der Datenbank|
 |DB_NAME| |_string_|Name der Datenbank|
 |DB_USER| |_string_|Datenbankbenutzer|
@@ -145,6 +147,7 @@ route_name:
   controller: 'App\Controller\AppController'
   method: 'index'
   request: 'get'
+
 ````
 Key|Wert|Typ|Beschreibung|
 |---|---|---|---|
@@ -163,9 +166,68 @@ Gib an, welche Lokalisationen du anbieten möchtest.
 1: de
 2: fr
 3: es
+
 ````
 Gib für jede verfügbare Sprache das entsprechende ICC-Landeskürzel(2 Zeichen) an.
 Für jede Angabe muss unter ``/translations`` eine Datei mit [ICC].yaml vorhanden sein,
 für Deutschland (de) beispielsweise also die Datei _de.yaml_.
  
 ## Public Webroot
+Der Webroot ist für den Anwender zugänglich und enthält daher neben der üblichen index.php
+auch weitere Elemente wie Bilder, kompilierte Stylesheets, Fonts und Javascripts.
+
+Für die Basisfunktion reichen jedoch folgende zwei Dateien aus:
+
+1. [.htaccess](../public/.htaccess)
+2. [index.php](../public/index.php)
+
+### Webserver/htaccess
+Damit das Routing ordnungsgemäß funktioniert, muss dem Webserver mitgeteilt werden,
+dass nur die _index.php_ aufgerufen werden soll, solange die angeforderte Datei oder
+das Verzeichnis nicht existiert. Alle Anfragen sollen über diese Indexdatei geleitet
+werden.
+
+````apacheconf
+#.htaccess
+
+DirectoryIndex index.php
+
+# enable apache rewrite engine
+RewriteEngine on
+
+# set your rewrite base
+# Edit this in your init method too if your script lives in a subfolder
+RewriteBase /
+
+# Deliver the folder or file directly if it exists on the server
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Push every request to index.php
+RewriteRule ^(.*)$ index.php [QSA]
+
+````
+
+Die _index.php_ tut nichts anderes, als den Anwendungskern zu laden und alle Anfragen
+zwischengespeichert dahin weiterzuleiten. Nachdem die letzte Ausgabe zurückgegeben wurde,
+wird der Speicher entleert und ausgegeben (_ob_start_ und _ob_flush_).
+
+````php
+<?php
+
+use App\Bootstrap;
+require_once dirname(__DIR__).'/vendor/autoload.php';
+
+ob_start();
+
+define('project_root', dirname(__DIR__));
+define('host', $_SERVER['HTTP_HOST']);
+
+$app = new Bootstrap();
+$app->addRoutes();
+$app->addNotFound();
+$app->init();
+
+ob_flush();
+
+````
