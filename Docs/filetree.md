@@ -1,5 +1,6 @@
 # Ordnerstruktur
-
+Das Projekt teilt sich unter folgender Ordnerstruktur in logische Bereiche auf, die anschließend
+näher erläutert werden.
 ````
 ./
 |__asstes/                          Unkompilierte Style Sheets und Grafiken
@@ -83,3 +84,40 @@
 |__composer.lock                    Lock-Datei
 |__README.md                        Index der Dokumentation
 ````
+## Assets
+Stylesheets werden mithilfe von SASS zu CSS kompiliert. Die kompilierten Stylesheets werden im
+Ordner **/public/styles** gespeichert. Sie können aber auch in jedem anderen Ordner unterhalb von **/public**
+gespeichert werden.
+
+Mehr zu den Assets findest du [hier](StyleAssets/assets.md).
+
+## config
+Hier werden globale Einstellungen vorgenommen, die das gesamte Projekt betreffen.
+
+### Environment
+Hier werden Entwicklungsmodus, Zugangsdaten, Benutzerklassen und mehr eingestellt.
+````yaml
+APP_ENV:    development
+APP_SECRET: 8a64534074c7c7e226b0c56f8af67bf4
+
+DB_TYPE:    mysql
+DB_HOST:    localhost
+DB_NAME:    logbook_db
+DB_USER:    root
+PASS:
+
+USER_ENTITY: App\Entity\User
+
+EMAIL_SENDER_ADDRESS: name@email.kom
+EMAIL_SENDER_NAME: Max Mustermann
+````
+Key|Wert|Typ|Beschreibung|
+|---|---|---|---|
+|APP_ENV|development|_string_|caching deaktiviert, Ausgabe aller Fehler|
+| | production|_string_|chaching aktiviert, Unterdrückung der Fehlerausgabe|
+|APP_SECRET|development|_string_|wird Session-Werten vorangestellt|
+|DB_TYPE|mysql, maria_db,mongo_db|_string_|gibt Datenbank-Treiber an|
+|DB_HOST| |_string_|Host der Datenbank|
+|DB_NAME| |_string_|Name der Datenbank|
+|DB_USER| |_string_|Datenbankbenutzer|
+|PASS| |_string_|Benutzerpasswort|
