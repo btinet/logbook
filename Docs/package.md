@@ -213,6 +213,8 @@ zwischengespeichert dahin weiterzuleiten. Nachdem die letzte Ausgabe zurückgege
 wird der Speicher entleert und ausgegeben (_ob_start_ und _ob_flush_).
 
 ````php
+# index.php
+
 <?php
 
 use App\Bootstrap;
