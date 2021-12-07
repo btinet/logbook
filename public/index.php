@@ -14,4 +14,3 @@ $app->addNotFound();
 $app->init();
 
 ob_flush();
-
