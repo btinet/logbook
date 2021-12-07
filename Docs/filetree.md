@@ -147,7 +147,7 @@ Key|Wert|Typ|Beschreibung|
 |request|get, post,delete ['get','post','delete'] |_string / array_|erlaubte Request-Methode(n)|
 
 ### Translation
-Hier werden Entwicklungsmodus, Zugangsdaten, Benutzerklassen und mehr eingestellt.
+Gib an, welche Lokalisationen du anbieten möchtest.
 ````yaml
 #translation.yaml
 0: en
