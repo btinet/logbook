@@ -1,4 +1,13 @@
 # Ordnerstruktur
+
+1. [Assets](#assets)
+2. [Config](#config)
+5. [Public Webroot](#public-webroot)
+7. Source
+8. Templates
+9. Translations
+
+
 Das Projekt teilt sich unter folgender Ordnerstruktur in logische Bereiche auf, die anschließend
 näher erläutert werden.
 ````
@@ -141,7 +150,7 @@ Key|Wert|Typ|Beschreibung|
 |---|---|---|---|
 |route_name|array()|_array_|Key muss eindeutig sein|
 |expression|/path/to/route/([a-d-0-9]*)|_string_|Request-URI der Route, momentan nur eine Variable erlaubt|
-|value|true / false|_bool_|muss true sein, wenn **expression** eine variable enthält|
+|value|true / false|_bool_|muss true sein, wenn **expression** eine Variable enthält|
 |controller||_string_|vollständiger Name der Controller-Klasse|
 |method| |_string_|Name der Controller-Methode|
 |request|get, post,delete ['get','post','delete'] |_string / array_|erlaubte Request-Methode(n)|
@@ -159,3 +168,4 @@ Gib für jede verfügbare Sprache das entsprechende ICC-Landeskürzel(2 Zeichen)
 Für jede Angabe muss unter ``/translations`` eine Datei mit [ICC].yaml vorhanden sein,
 für Deutschland (de) beispielsweise also die Datei _de.yaml_.
  
+## Public Webroot
