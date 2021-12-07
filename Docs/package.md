@@ -154,7 +154,7 @@ Key|Wert|Typ|Beschreibung|
 |route_name|array()|_array_|Key muss eindeutig sein|
 |expression|/path/to/route/([a-d-0-9]*)|_string_|Request-URI der Route, momentan nur eine Variable erlaubt|
 |value|true / false|_bool_|muss true sein, wenn **expression** eine Variable enthält|
-|controller||_string_|vollständiger Name der Controller-Klasse|
+|controller| |_string_|vollständiger Name der Controller-Klasse|
 |method| |_string_|Name der Controller-Methode|
 |request|get, post,delete ['get','post','delete'] |_string / array_|erlaubte Request-Methode(n)|
 
