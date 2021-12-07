@@ -1,0 +1,19 @@
+{% extends 'app.html.twig' %}
+
+{% block navigation %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex flex-column justify-content-center align-items-center h-100 flex-grow-1">
+        <div class="mx-auto bg-light border border-color-dark px-3 shadow-sm" style="max-width: 576px">
+            <div class="d-flex justify-content-space-between align-items-flex-end">
+                <div class="pb-3">
+                    <h1>404 - Seite nicht gefunden!</h1>
+                    <p>Die Seite unter <span class="text-danger">{{ host ~ path }}</span> wurde nicht gefunden.</p>
+                    <p>Probiere es mit der <a href="{{ route('') }}">Startseite</a>!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
