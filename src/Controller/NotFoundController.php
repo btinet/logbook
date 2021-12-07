@@ -10,7 +10,8 @@ class NotFoundController extends AbstractController
     {
         return $this->render('messages/not_found.html.twig',[
             'path' => $path,
-            'host' => host
+            'host' => host,
+            'title' => 'TMA - Seite nicht gefunden!'
         ]);
     }
 }
