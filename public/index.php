@@ -10,6 +10,7 @@ define('host', $_SERVER['HTTP_HOST']);
 
 $app = new Bootstrap();
 $app->addRoutes();
+$app->addNotFound();
 $app->init();
 
 ob_flush();
