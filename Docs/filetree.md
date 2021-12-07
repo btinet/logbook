@@ -35,7 +35,7 @@
 |   |   |__User.php
 |   |__Extension/                   Erweiterungen für Drittanbieteranwendungen
 |   |   |__Twig/
-|   |   |   |__TwigExtension.php    
+|   |       |__TwigExtension.php    
 |   |__Repository/                  benutzerdefinierte Methoden zum Abruf von Daten
 |   |   |__TagRepository.php
 |   |   |__TaskRepository.php
