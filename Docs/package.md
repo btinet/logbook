@@ -6,7 +6,7 @@
 4. [Public Webroot](#public-webroot)
 5. [Source](#source)
 6. [Templates](#templates)
-7. [Translations](#translation)
+7. [Translations](#translations)
 
 ## Ordnerstruktur
 Das Projekt teilt sich unter folgender Ordnerstruktur in logische Bereiche auf, die anschließend
