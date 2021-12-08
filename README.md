@@ -24,9 +24,9 @@ Datenbank-Entitäten als Arrays an den Controller übergeben.
 6. [Erweiterungen](./Docs/extensions.md)
 
 ## Drittanbieter
-- Steampixel/SimpleRouter
-- SPYC/YAML-Loader
-- Symfony/Twig
+- [steampixel/SimplePHPRouter](https://github.com/steampixel/simplePHPRouter)
+- [mustangostang/spyc](https://github.com/mustangostang/spyc)
+- [twigphp/twig](https://github.com/twigphp/Twig)
 
 ## Entfernt
 - KNP-Time-Bundle (keine Kompatibilität)
