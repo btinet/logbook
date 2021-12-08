@@ -273,3 +273,5 @@ Wort|Bedeutung|verwendet von|
 |21031|  Benutzername ist keine Zeichenkette | App\Service\UserService |
 |21034|  Vorname ist keine Zeichenkette | App\Service\UserService |
 |21035|  Nachname ist keine Zeichenkette | App\Service\UserService |
+
+Weitere Information über die Verwendung von Translations findest du [hier](../README.md)
