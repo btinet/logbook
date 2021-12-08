@@ -12,87 +12,87 @@
 Das Projekt teilt sich unter folgender Ordnerstruktur in logische Bereiche auf, die anschließend
 näher erläutert werden.
 ````
-./
-|__asstes/                          Unkompilierte Style Sheets und Grafiken
+/
+|__asstes/
 |   |__images/  
 |   |__styles/
 |       |__app.scss     
 |    
-|__config/                          globale Konfiguration
-|   |__env.bak.yaml                 umbenennen in env.yaml
-|   |__routes.yaml                  alle Routen
-|   |__translation.yaml             alle verfügbaren Sprachen für den Translator
+|__config/
+|   |__env.bak.yaml
+|   |__routes.yaml
+|   |__translation.yaml
 |
-|__cron/                            Cron-Job für den E-Mail-Versand
+|__cron/
 |   |__Database.php
 |   |__notice_user.php
 |
-|__Docs/                            diese Dokumentation
+|__Docs/
 |
-|__public/                          Webroot
-|   |__images/                      Bild- und Grafikdateien
-|   |__.htaccess                    Interpreteranweisungen für den Webserver
-|   |__app.js                       globales Javascript
+|__public/
+|   |__images/
+|   |__.htaccess
+|   |__app.js
 |   |__favicon.png
 |   |__favicon.svg
-|   |__index.php                    Entrypoint der Website
+|   |__index.php
 |
 |__sql/
-|   |__tables.txt                   SQL-Script für die Erstellung der Tabellen
+|   |__tables.txt
 |
-|__src/                             Sourceroot der Anwendung
-|   |__Controller/                  Controller-Klassen
+|__src/
+|   |__Controller/
 |   |   |__AppController.php
 |   |   |__SecurityController.php
 |   |   |__TagController.php
 |   |   |__TaskController.php
 |   |
-|   |__Entity/                      Entitäten der Datenbanktabellen
+|   |__Entity/
 |   |   |__Tag.php
 |   |   |__Task.php
 |   |   |__User.php
 |   |
-|   |__Extension/                   Erweiterungen für Drittanbieteranwendungen
+|   |__Extension/
 |   |   |__Twig/
 |   |       |__TwigExtension.php    
 |   |
-|   |__Repository/                  benutzerdefinierte Methoden zum Abruf von Daten
+|   |__Repository/
 |   |   |__TagRepository.php
 |   |   |__TaskRepository.php
 |   |   |__UserRepository.php
 |   |
-|   |__Service/                     Hilfsklassen
+|   |__Service/
 |   |   |__EntityManagerService.php
 |   |   |__EntityRepositoryService.php
 |   |   |__PasswordService.php
 |   |   |__TranslationService.php
 |   |   |__UserService.php
 |   |
-|   |__AbstractController.php       Abstrakte Controllerklasse mit allgemeinen Funktionen
-|   |__Bootstrap.php                Anwendungskern
-|   |__Database.php                 Modelklasse
-|   |__Request.php                  Requestklasse
-|   |__Session.php                  Sessionklasse
+|   |__AbstractController.php
+|   |__Bootstrap.php
+|   |__Database.php
+|   |__Request.php
+|   |__Session.php
 |
-|__templates/                       HTML-Templates
+|__templates/
 |   |__app/
 |   |__messages/
 |   |__navigation/
 |   |__security/
 |   |__tag/
 |   |__task/
-|   |__app.html.twig                2nd-Level-Basistemplate
+|   |__app.html.twig
 |   |__authentication.html.twig     
-|   |__base.html.twig               1st-Level-Basistemplate
+|   |__base.html.twig
 |
-|__translations/                    Wörterbücher
+|__translations/
 |   |__de.yaml
 |   |__en.yaml
 |
 |__.gitignore                       
-|__composer.json                    Repositoryinformationen
-|__composer.lock                    Lock-Datei
-|__README.md                        Index der Dokumentation
+|__composer.json
+|__composer.lock
+|__README.md
 ````
 ## Assets
 Stylesheets werden mithilfe von SASS zu CSS kompiliert. Die kompilierten Stylesheets werden im
@@ -255,9 +255,21 @@ dein Wörterbuch verfügt, kannst du selbst entscheiden. Folgende Vokabeln müss
 vorhanden sein:
 
 Wort|Bedeutung|verwendet von|
-|---:|---|---|
-|200|alles in Ordnung|App\Service\UserService|
-|201| | |
-|202| | |
-|203| | |
-|204| | |
+|---|---|---|
+|1601| Passwort ist keine Zeichenkette | App\Service\PasswordService |
+|1602| Passwörter stimmen nicht überein | App\Service\PasswordService |
+|1603| Passwort ist nicht lang genug | App\Service\PasswordService |
+|1604| Passwort verwendet unerlaubte Zeichen | App\Service\PasswordService |
+|16051|  Passwort enthält zu viele Leerzeichen | App\Service\PasswordService |
+|16052|  Passwort enthält keine Großbuchstaben | App\Service\PasswordService |
+|16053|  Passwort enthält keine Kleinbuchstaben | App\Service\PasswordService |
+|16054|  Passwort enthält keine Sonderzeichen | App\Service\PasswordService |
+|16055|  Passwort enthält keine Ziffern | App\Service\PasswordService |
+|21011|  Benutzername existiert bereits | App\Service\UserService |
+|210111| Benutzer nicht gefunden | App\Service\UserService |
+|210112| Benutzer und Passwort stimmen nicht überein | App\Service\UserService |
+|21012| E-Mail-Adresse existiert bereits | App\Service\UserService |
+|21022|  E-Mail-Adresse ist nicht gültig | App\Service\UserService |
+|21031|  Benutzername ist keine Zeichenkette | App\Service\UserService |
+|21034|  Vorname ist keine Zeichenkette | App\Service\UserService |
+|21035|  Nachname ist keine Zeichenkette | App\Service\UserService |
