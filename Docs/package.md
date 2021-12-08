@@ -233,3 +233,27 @@ $app->init();
 ob_flush();
 
 ````
+
+## Source
+Im Ordner _/src_ liegen all die Projektdateien, die den Charakter deiner Anwendung
+ausmachen. Dazu zählen im Besonderen die Controller- und Modellstrukturen.
+Diese werden im entsprechenden Unterordner gespeichert.
+
+Weitere Information findest du [hier](../README.md) 
+
+## Templates
+Die View-Schicht wird durch das HTML-Template-System abgebildet und gewährleistet damit
+die strikte Trennung nach dem MVC-Muster zwischen Datenschicht, Kontrollschicht
+und Ausgabeschicht.
+
+Weitere Information findest du [hier](../README.md)
+
+## Translations
+Entsprechend deiner Einstellungen in der [translation.yaml](../config/translation.yaml)
+musst du hier für jede Sprache ein eigenes Wörterbuch anlegen. Über welche Vokabeln
+dein Wörterbuch verfügt, kannst du selbst entscheiden. Folgende Vokabeln müssen jedoch
+vorhanden sein:
+
+Wort|Bedeutung|
+|---|---|
+|200|alles in Ordnung|
