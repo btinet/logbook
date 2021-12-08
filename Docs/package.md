@@ -254,6 +254,10 @@ musst du hier für jede Sprache ein eigenes Wörterbuch anlegen. Über welche Vo
 dein Wörterbuch verfügt, kannst du selbst entscheiden. Folgende Vokabeln müssen jedoch
 vorhanden sein:
 
-Wort|Bedeutung|
-|---|---|
-|200|alles in Ordnung|
+Wort|Bedeutung|verwendet von|
+|---:|---|---|
+|200|alles in Ordnung|App\Service\UserService|
+|201| | |
+|202| | |
+|203| | |
+|204| | |
