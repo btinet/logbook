@@ -4,9 +4,9 @@
 2. [Assets](#assets)
 3. [Config](#config)
 4. [Public Webroot](#public-webroot)
-5. Source
-6. Templates
-7. Translations
+5. [Source](#source)
+6. [Templates](#templates)
+7. [Translations](#translation)
 
 ## Ordnerstruktur
 Das Projekt teilt sich unter folgender Ordnerstruktur in logische Bereiche auf, die anschließend
