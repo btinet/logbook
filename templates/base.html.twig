@@ -8,21 +8,20 @@
         <link rel="icon" type="image/svg+xml" href="{{ link('favicon.svg') }}">
         <link rel="icon" type="image/png" href="{{ link('favicon.png') }}">
     {% endblock %}
-    <script>
-        // Check that service workers are supported
-        if ('serviceWorker' in navigator) {
-            // Use the window load event to keep the page load performant
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('{{ link('build/service-worker.js')}}');
-            });
-        }
-    </script>
-
+    {% block javascripts %}
+        <script>
+            // Check that service workers are supported
+            if ('serviceWorker' in navigator) {
+                // Use the window load event to keep the page load performant
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('{{ link('build/service-worker.js')}}');
+                });
+            }
+        </script>
+        <script src="{{ link('build/main.js') }}"></script>
+    {% endblock %}
 </head>
 <body class="d-flex flex-column justify-content-between">
     {% block body %}{% endblock %}
-    {% block javascripts %}
-        <script src="{{ link('build/main.js') }}"></script>
-    {% endblock %}
 </body>
 </html>
