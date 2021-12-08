@@ -118,6 +118,8 @@ DB_USER:    root
 PASS:
 
 USER_ENTITY: App\Entity\User
+NOTFOUND_CONTROLLER: App\Controller\NotFoundController
+NOTFOUND_METHOD: 404
 
 EMAIL_SENDER_ADDRESS: name@email.kom
 EMAIL_SENDER_NAME: Max Mustermann
@@ -134,6 +136,8 @@ Key|Wert|Typ|Beschreibung|
 |DB_USER| |_string_|Datenbankbenutzer|
 |PASS| |_string_|Benutzerpasswort|
 |USER_ENTITY| |_string_|vollständiger Name der User-Klasse|
+|NOTFOUND_CONTROLLER| |_string_|vollständiger Name der Controller-klasse|
+|NOTFOUND_METHOD| |_string_|Name der Methode|
 |EMAIL_SENDER_ADDRESS| |_string_|Adresse des Absenders|
 |EMAIL_SENDER_NAME| |_string_|Name des Absenders|
 
@@ -233,6 +237,8 @@ $app->init();
 ob_flush();
 
 ````
+
+Weitere Informationen über den [Anwendungskern](core.md).
 
 ## Source
 Im Ordner _/src_ liegen all die Projektdateien, die den Charakter deiner Anwendung

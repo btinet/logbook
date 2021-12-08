@@ -17,7 +17,7 @@ Datenbank-Entitäten als Arrays an den Controller übergeben.
 
 ## Dokumentation
 1. [Paketinhalt](./Docs/package.md)
-2. Anwendungskern
+2. [Anwendungskern](./Docs/core.md)
 3. Controller
 4. View
 5. Model
