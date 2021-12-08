@@ -1,6 +1,6 @@
-import {setAttributes, validateForms, selectAll} from "./app/core.js";
+import {setAttributes, validateForms, selectAll} from "./app/core";
 
-let $buttons = selectAll('.disabled')
+let buttons = selectAll('.disabled')
 let forms = selectAll('.needs-validation')
-setAttributes($buttons,'disabled','disabled')
+setAttributes(buttons,'disabled','disabled')
 validateForms(forms)
