@@ -102,61 +102,10 @@
                 <a href="{{ route('task/new') }}" class="btn btn-primary px-2">
                     Neu
                 </a>
-                <button form="tasks_form" id="task_delete" type="submit" class="btn btn-danger disabled">
+                <button form="tasks_form" id="list_delete" type="submit" class="btn btn-danger disabled">
                     Löschen
                 </button>
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block javascripts %}
-{{ parent() }}
-    <script type="text/javascript">
-        ( function (){
-            'use strict'
-
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            let filter_forms = document.querySelectorAll('.filter_form');
-
-            // Loop over them and prevent submission
-            Array.prototype.slice.call(filter_forms)
-                .forEach(function (form) {
-                    form.addEventListener('change', function (event) {
-                        this.form.submit();
-                        console.log('form submitted');
-                    }, false)
-                })
-
-            let $submitButton = document.querySelector('#task_delete');
-            let $formInputFields = document.querySelectorAll('.checkbox-action');
-
-            Array.prototype.slice.call($formInputFields)
-                .forEach(function ($field) {
-                    let $i = 0;
-                    addMultipleEventListener($field,['click',''],validateForm)
-                })
-
-            function addMultipleEventListener(element, events, handler) {
-                events.forEach(e => element.addEventListener(e, handler))
-            }
-
-            function validateForm($i){
-                Array.prototype.slice.call($formInputFields)
-                    .forEach(function ($field) {
-                        if($field.checked === true){
-                            $i = 1;
-                        }
-                    })
-                if($i === 1){
-                    $submitButton.classList.remove('disabled');
-                    $submitButton.removeAttribute('disabled');
-                } else {
-                    $submitButton.classList.add('disabled');
-                    $submitButton.setAttribute('disabled','disabled')
-                }
-            }
-
-        })();
-    </script>
 {% endblock %}

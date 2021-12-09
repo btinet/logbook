@@ -25,7 +25,7 @@
                 <a href="{{ route('tag/new') }}" class="btn btn-primary px-2">
                     Neu
                 </a>
-                <button form="tags_form" id="tag_delete" type="submit" class="btn btn-danger disabled">
+                <button form="tags_form" id="list_delete" type="submit" class="btn btn-danger disabled">
                     {{ trans["button"]["submit"]["delete"] }}
                 </button>
             </div>
@@ -33,41 +33,4 @@
     </div>
 {% endblock %}
 
-{% block javascripts %}
-{{ parent() }}
-    <script type="text/javascript">
-        ( function (){
-            'use strict'
 
-            let $submitButton = document.querySelector('#tag_delete');
-            let $formInputFields = document.querySelectorAll('.checkbox-action');
-
-            Array.prototype.slice.call($formInputFields)
-                .forEach(function ($field) {
-                    let $i = 0;
-                    addMultipleEventListener($field,['click',''],validateForm)
-                })
-
-            function addMultipleEventListener(element, events, handler) {
-                events.forEach(e => element.addEventListener(e, handler))
-            }
-
-            function validateForm($i){
-                Array.prototype.slice.call($formInputFields)
-                    .forEach(function ($field) {
-                        if($field.checked === true){
-                            $i = 1;
-                        }
-                    })
-                if($i === 1){
-                    $submitButton.classList.remove('disabled');
-                    $submitButton.removeAttribute('disabled');
-                } else {
-                    $submitButton.classList.add('disabled');
-                    $submitButton.setAttribute('disabled','disabled')
-                }
-            }
-
-        })();
-    </script>
-{% endblock %}
