@@ -61,6 +61,8 @@ class TaskController extends AbstractController
 
         $tags = $this->getRepository(Tag::class)->findBy([
             'user' => $this->session->get('user'),
+        ],[
+            'name' => 'ASC'
         ]);
 
         return $this->render('task/index.html.twig',[
