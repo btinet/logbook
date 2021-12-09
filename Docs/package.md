@@ -13,11 +13,17 @@ Das Projekt teilt sich unter folgender Ordnerstruktur in logische Bereiche auf, 
 näher erläutert werden.
 ````
 /
-|__asstes/
+|__assets/
+|   |__app/
+|   |   |__core.js 
+|   |   |__form.js 
+|   |
 |   |__images/  
 |   |__styles/
-|       |__app.scss     
-|    
+|   |   |__app.scss     
+|   |
+|   |__app.js
+|
 |__config/
 |   |__env.bak.yaml
 |   |__routes.yaml
@@ -89,15 +95,22 @@ näher erläutert werden.
 |   |__de.yaml
 |   |__en.yaml
 |
+|__.babelrc                       
 |__.gitignore                       
 |__composer.json
 |__composer.lock
+|__package.json
+|__package-lock.json
 |__README.md
+|__webpack.config.js
+
 ````
 ## Assets
 Stylesheets werden mithilfe von SASS zu CSS kompiliert. Die kompilierten Stylesheets werden im
 Ordner **/public/styles** gespeichert. Sie können aber auch in jedem anderen Ordner unterhalb von **/public**
 gespeichert werden.
+
+Javascript wird mit Webpack minimiert und unter **/public/build** ausgegeben.
 
 Mehr zu den Assets findest du [hier](StyleAssets/assets.md).
 

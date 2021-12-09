@@ -28,16 +28,17 @@ Datenbank-Entitäten als Arrays an den Controller übergeben.
 - [mustangostang/spyc](https://github.com/mustangostang/spyc)
 - [twigphp/twig](https://github.com/twigphp/Twig)
 
+## Asset Bundler
+- webpack
+
 ## Entfernt
 - KNP-Time-Bundle (keine Kompatibilität)
 
 ## To-Do
-- "not found"-Fehlerseiten implementieren
 - Erinnerungsnachricht besser formatieren
   - Nutzer mit Namen ansprechen
   - Tags integrieren
   - Datum nennen
 - Login-Gate für mobile Seiten ausreichend optimieren
 - Overflow der Task-Ansicht für mobile Geräte stoppen (horizontales Scrollen bei overflow)
-- Englischwörterbuch
 - Texte auf der Seite in Abhängigkeit der Systemsprache übersetzen lassen
