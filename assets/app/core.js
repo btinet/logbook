@@ -24,7 +24,7 @@ export default class Core {
     {
         Array.prototype.slice.call(elements)
             .forEach(function (element) {
-                if(value)
+                if(value !== null)
                 {
                     element.setAttribute(qualifiedName,value)
                 } else {
@@ -32,6 +32,17 @@ export default class Core {
                 }
 
             })
+        return null
+    }
+
+    setAttribute(element,qualifiedName, value = null)
+    {
+        if(value)
+        {
+            element.setAttribute(qualifiedName,value)
+        } else {
+            element.removeAttribute(qualifiedName)
+        }
         return null
     }
 

@@ -31,9 +31,9 @@ function validateDeleteForm($i){
         })
     if($i === 1){
         App.setClass(submitButton,'disabled',true)
-        App.setAttributes(submitButton,'disabled')
+        App.setAttribute(submitButton,'disabled')
     } else {
         App.setClass(submitButton,'disabled')
-        App.setAttributes(submitButton,'disabled','disabled')
+        App.setAttribute(submitButton,'disabled','disabled')
     }
 }
