@@ -1,26 +1,60 @@
+import Form from "./form";
 
-export function setAttributes (elements,qualifiedName, value)
-{
-    Array.prototype.slice.call(elements)
-        .forEach(function (element) {
-            element.setAttribute(qualifiedName,value);
-        })
-}
+export default class Core {
 
-export function validateForms(forms)
-{
-    Array.prototype.slice.call(forms)
-        .forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
+    status = 0;
+    form
+
+    constructor(status = 0) {
+        this.status = status;
+        this.form = new Form();
+    }
+
+    findBy(selector)
+    {
+        return document.querySelectorAll(selector)
+    }
+
+    findOneBy(selector)
+    {
+        return document.querySelector(selector)
+    }
+
+    setAttributes(elements,qualifiedName, value = null)
+    {
+        Array.prototype.slice.call(elements)
+            .forEach(function (element) {
+                if(value)
+                {
+                    element.setAttribute(qualifiedName,value)
+                } else {
+                    element.removeAttribute(qualifiedName)
                 }
 
-                form.classList.add('was-validated')
-            }, false)
-        })
+            })
+        return null
+    }
+
+    getAttribute(element,qualifiedName)
+    {
+        return element.getAttribute(qualifiedName)
+    }
+
+    setClass(element,value,remove = false)
+    {
+        if(remove)
+        {
+            element.classList.remove(value)
+        } else {
+            element.classList.add(value)
+        }
+        return null
+    }
+
+    addMultipleEventListener(element, events, handler)
+    {
+        events.forEach(e => element.addEventListener(e, handler))
+        return null
+    }
+
 }
-
-export {selectAll} from "./select.js"
-
