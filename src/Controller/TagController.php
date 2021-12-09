@@ -28,7 +28,9 @@ class TagController extends AbstractController
         $this->denyUnlessGranted('ROLE_USER');
         $tags = $this->getRepository(Tag::class)->findBy([
         'user' => $this->session->get('user'),
-    ]);
+    ],[
+        'name' => 'ASC'
+        ]);
         return $this->render('tag/index.html.twig',[
             'active_section' => $this->active_section,
             'flash' => $this->getFlash(),
