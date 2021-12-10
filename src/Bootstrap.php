@@ -27,22 +27,20 @@ class Bootstrap
     /**
      * @param $class
      * @param $method
-     * @param $mandatory
+     * @param array $mandatory
      * @return mixed
      * @throws Exception
      */
-    private function runControllerMethod($class, $method, $mandatory = null)
+    private function runControllerMethod($class, $method, array $mandatory = array())
     {
         if (!class_exists($class)) {
             throw new Exception('Class not found.');
-        } else {
-            $class = new $class;
-            if(!method_exists($class,$method)) {
-                throw new Exception('Method not found.');
-            } else {
-                return $class->$method($mandatory);
-            }
         }
+        $class = new $class;
+        if(!method_exists($class,$method)) {
+            throw new Exception('Method not found.');
+        }
+        return call_user_func_array(array($class, $method), $mandatory);
     }
 
     public function addRoutes()
