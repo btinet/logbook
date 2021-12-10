@@ -38,7 +38,6 @@ näher erläutert werden.
 |__public/
 |   |__images/
 |   |__.htaccess
-|   |__app.js
 |   |__favicon.png
 |   |__favicon.svg
 |   |__index.php
