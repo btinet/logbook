@@ -1,7 +1,7 @@
 # Anwendungskern
 
 1. [Aufbau der Bootstrap-Klasse](#aufbau-der-bootstrap-klasse)
-2. Routing
+2. [Routing](#routing)
 3. Aufruf des Controllers
 
 ## Aufbau der Bootstrap-Klasse
@@ -50,3 +50,37 @@ Die Bootstrap-Klasse hängt von folgenden Variablen ab:
 |host|Konstante|$_SERVER['HTTP_HOST']||
 
 Die **autoload.php** von Composer muss als erstes per ``require_once()`` geladen werden.
+
+## Routing
+
+````php
+//[...]
+
+public function addRoutes()
+    {
+        foreach ($this->routes as $route)
+        {
+            if($route['value'])
+            {
+                $this->routing->add($route['expression'], function ($id) use ($route) {
+                    try {
+                        return $this->runControllerMethod($route['controller'], $route['method'], $id);
+                    } catch (Exception $e) {
+                        return 'Exception abgefangen: '. $e->getMessage() . "\n";
+                    }
+                }, $route['request']);
+            } else {
+                $this->routing->add($route['expression'], function () use ($route) {
+                    try {
+                        return $this->runControllerMethod($route['controller'], $route['method']);
+                    } catch (Exception $e) {
+                        return 'Exception abgefangen: '. $e->getMessage() . "\n";
+                    }
+                }, $route['request']);
+            }
+        }
+    }
+
+//[...]
+
+````
