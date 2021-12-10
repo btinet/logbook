@@ -159,7 +159,6 @@ Hier werden die Routen der App festgelegt und welche Controller-Methode aufgeruf
 #routes.yaml
 route_name:
   expression: '/path/to/route/([0-9]*)'
-  value:
   controller: 'App\Controller\AppController'
   method: 'index'
   request: 'get'
@@ -169,7 +168,6 @@ Key|Wert|Typ|Beschreibung|
 |---|---|---|---|
 |route_name|array()|_array_|Key muss eindeutig sein|
 |expression|/path/to/route/([a-z-0-9]*)|_string_|Request-URI der Route, momentan nur eine Variable erlaubt|
-|value|true / false|_bool_|muss true sein, wenn **expression** eine Variable enthält|
 |controller| |_string_|vollständiger Name der Controller-Klasse|
 |method| |_string_|Name der Controller-Methode|
 |request|get, post,delete ['get','post','delete'] |_string / array_|erlaubte Request-Methode(n)|
