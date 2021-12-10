@@ -9,9 +9,12 @@ App.setAttributes(App.findBy('.disabled'),'disabled','disabled')
 App.form.validate(App.findBy('.needs-validation'))
 App.form.submitOn(App.findBy('.filter_form'),'change')
 
+/*
+ * listen to mouse click on each selected field (with css class .checkbox-action)
+ * Run function "validateDeleteForm" to check if a checkbox is ticked
+ * If any checkbox is ticked, enable submit button to delete ticked entries.
+ */
 setListener(formInputFields,validateDeleteForm)
-
-// listen to click on each field and run custom function
 function setListener(fields,customFunction, eventActions = ['click'])
 {
     Array.prototype.slice.call(fields)
@@ -20,7 +23,6 @@ function setListener(fields,customFunction, eventActions = ['click'])
             App.addMultipleEventListener(field,eventActions,customFunction)
         })
 }
-
 // validate checkboxes to enable delete button
 function validateDeleteForm($i){
     Array.prototype.slice.call(formInputFields)
