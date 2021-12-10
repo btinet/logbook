@@ -124,6 +124,7 @@ class TaskController extends AbstractController
      */
     public function update($id)
     {
+        $id = $id[0];
         $this->denyUnlessGranted('ROLE_USER');
 
         if($id)

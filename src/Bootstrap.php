@@ -49,24 +49,14 @@ class Bootstrap
     {
         foreach ($this->routes as $route)
         {
-            if($route['value'])
-            {
-                $this->routing->add($route['expression'], function ($id) use ($route) {
-                    try {
-                        return $this->runControllerMethod($route['controller'], $route['method'], $id);
-                    } catch (Exception $e) {
-                        return 'Exception abgefangen: '. $e->getMessage() . "\n";
-                    }
-                }, $route['request']);
-            } else {
                 $this->routing->add($route['expression'], function () use ($route) {
+                    $arguments = func_get_args();
                     try {
-                        return $this->runControllerMethod($route['controller'], $route['method']);
+                        return $this->runControllerMethod($route['controller'], $route['method'], $arguments);
                     } catch (Exception $e) {
                         return 'Exception abgefangen: '. $e->getMessage() . "\n";
                     }
                 }, $route['request']);
-            }
         }
     }
 

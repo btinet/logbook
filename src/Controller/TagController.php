@@ -64,12 +64,12 @@ class TagController extends AbstractController
     }
 
     /**
-     * @param int $id
      * @return string
      * @throws ReflectionException
      */
-    public function update(int $id): string
+    public function update($id): string
     {
+        $id = $id[0];
         $this->denyUnlessGranted('ROLE_USER');
 
         $tag = $this->getRepository(Tag::class)->findOneBy(['id' => $id]);
