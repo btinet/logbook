@@ -6,7 +6,7 @@ use App\AbstractController;
 
 class NotFoundController extends AbstractController
 {
-    public function index($path): string
+    public function notFound($path): string
     {
         return $this->render('messages/not_found.html.twig',[
             'path' => $path,

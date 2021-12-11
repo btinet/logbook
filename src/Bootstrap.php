@@ -43,6 +43,18 @@ class Bootstrap
         return call_user_func_array(array($class, $method), $mandatory);
     }
 
+    /**
+     * @throws Exception
+     */
+    private function setNotFoundController()
+    {
+        if(!isset($_ENV['NOTFOUND_CONTROLLER']))
+        {
+            throw new Exception('NOTFOUND_CONTROLLER: is not set in env.yaml');
+        }
+        return $classFQN = $_ENV['NOTFOUND_CONTROLLER'];
+    }
+
     public function addRoutes()
     {
         foreach ($this->routes as $route)
@@ -60,10 +72,11 @@ class Bootstrap
 
     public function addNotFound()
     {
-        $this->routing->pathNotFound(function($path) {
+        $this->routing->pathNotFound(function() {
             header('HTTP/1.0 404 Not Found');
             try {
-                echo $this->runControllerMethod('App\Controller\NotFoundController','index',$path);
+                $controller = $this->setNotFoundController();
+                echo $this->runControllerMethod($controller,'notFound',func_get_args());
             } catch (Exception $e) {
                 echo 'Exception abgefangen: '. $e->getMessage() . "\n";
             }
