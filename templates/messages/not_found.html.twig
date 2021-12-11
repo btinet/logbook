@@ -1,19 +1,28 @@
 {% extends 'app.html.twig' %}
 
+
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ link('styles/error.css') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ link('favicon.svg') }}">
+    <link rel="icon" type="image/png" href="{{ link('favicon.png') }}">
+{% endblock %}
 {% block navigation %}
+
 
 {% endblock %}
 
-{% block content %}
-    <div class="d-flex flex-column justify-content-center align-items-center h-100 flex-grow-1">
-        <div class="mx-auto bg-light border border-color-dark px-3 shadow-sm" style="max-width: 576px">
-            <div class="d-flex justify-content-space-between align-items-flex-end">
-                <div class="pb-3">
-                    <h1>404 - Seite nicht gefunden!</h1>
-                    <p>Die Seite unter <span class="text-danger">{{ host ~ path }}</span> wurde nicht gefunden.</p>
-                    <p>Probiere es mit der <a href="{{ route('') }}">Startseite</a>!</p>
-                </div>
-            </div>
-        </div>
+{% block body %}
+
+
+    <div class="noise"></div>
+    <div class="overlay"></div>
+    <div class="terminal">
+        <h1>Error <span class="errorcode">404</span></h1>
+        <p class="output">Die angeforderte Seite existiert nicht oder nicht mehr oder ist unter einer neuen Adresse zu erreichen.</p>
+        <p class="output">Gehe <a href="#" onclick="history.back()">zurück</a> oder <a href="{{ route('/') }}">zur Startseite</a>.</p>
+        <p class="output">Viel Erfolg!</p>
     </div>
+
+
 {% endblock %}
