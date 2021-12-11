@@ -35,6 +35,7 @@ Datenbank-Entitäten als Arrays an den Controller übergeben.
 - KNP-Time-Bundle (keine Kompatibilität)
 
 ## To-Do
+- Funktion für Url-Generator in Controllern und Templates entwickeln
 - Erinnerungsnachricht besser formatieren
   - Nutzer mit Namen ansprechen
   - Tags integrieren
