@@ -8,7 +8,7 @@ let formInputFields = App.findBy('.checkbox-action');
 App.setAttributes(App.findBy('.disabled'),'disabled','disabled')
 App.form.validate(App.findBy('.needs-validation'))
 App.form.submitOn(App.findBy('.filter_form'),'change')
-
+let htmlFileSize = (document.documentElement.outerHTML.length/1024).toFixed(0)
 /*
  * listen to mouse click on each selected field (with css class .checkbox-action)
  * Run function "validateDeleteForm" to check if a checkbox is ticked

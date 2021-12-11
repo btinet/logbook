@@ -256,6 +256,18 @@ $columns:   12;
 html{
   -webkit-text-size-adjust: 100%;
 }
+
+#myProgress {
+  width: 100%;
+  background-color: grey;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: green;
+}
+
 body{
   @include margin-x(0,0);
   @include margin-y(0,0);
@@ -876,6 +888,11 @@ a:not([class]){
     background-color: map-get($theme-colors,'secondary');
     color: map-get($theme-colors,'dark');
   }
+}
+
+#page{
+  display: none;
+  height: 100%;
 }
 
 .img-fluid {

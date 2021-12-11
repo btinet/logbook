@@ -68,4 +68,8 @@ export default class Core {
         return null
     }
 
+    setDisplay(selector, value) {
+        document.querySelector(selector).style.display = value;
+    }
+
 }
