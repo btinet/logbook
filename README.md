@@ -43,3 +43,4 @@ Datenbank-Entitäten als Arrays an den Controller übergeben.
 - Login-Gate für mobile Seiten ausreichend optimieren
 - Overflow der Task-Ansicht für mobile Geräte stoppen (horizontales Scrollen bei overflow)
 - Texte auf der Seite in Abhängigkeit der Systemsprache übersetzen lassen
+- Fallback-Variable für locale
