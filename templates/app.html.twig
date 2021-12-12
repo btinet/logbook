@@ -14,7 +14,7 @@
     {% block flash_messages %}
         {{ flash|raw }}
     {% endblock %}
-    <main class="flex-grow-1">
+    <main class="flex-grow-1" id="page">
         {% block content %}{% endblock %}
     </main>
     {% block footer %}
