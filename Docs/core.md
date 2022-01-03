@@ -97,4 +97,4 @@ Der Ausdruck der Route **app_index** lautet ``'/'`` und entspricht damit der Req
 Folglich wird der Controller ``App\Controller\AppController`` mit der Methode ``index`` (sofern
 die Request-Methode _GET_ war) aufgerufen.
 
-Erfahre mehr über die [Verwendung von Controllern](../README.md).
+Erfahre mehr über die [Verwendung von Controllern](controller.md).

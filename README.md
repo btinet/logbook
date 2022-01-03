@@ -18,7 +18,7 @@ Datenbank-Entitäten als Arrays an den Controller übergeben.
 ## Dokumentation
 1. [Paketinhalt](./Docs/package.md)
 2. [Anwendungskern](./Docs/core.md)
-3. Controller
+3. [Controller](./Docs/controller.md)
 4. View
 5. Model
 6. [Erweiterungen](./Docs/extensions.md)
@@ -30,9 +30,6 @@ Datenbank-Entitäten als Arrays an den Controller übergeben.
 
 ## Asset Bundler
 - webpack
-
-## Entfernt
-- KNP-Time-Bundle (keine Kompatibilität)
 
 ## To-Do
 - Funktion für Url-Generator in Controllern und Templates entwickeln
