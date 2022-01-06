@@ -167,7 +167,7 @@ route_name:
 Key|Wert|Typ|Beschreibung|
 |---|---|---|---|
 |route_name|array()|_array_|Key muss eindeutig sein|
-|expression|/path/to/route/([a-z-0-9]*)|_string_|Request-URI der Route, momentan nur eine Variable erlaubt|
+|expression|/path/to/route/([a-z-0-9]*)|_string_|Request-URI der Route mit beliebig vielen Parametern|
 |controller| |_string_|vollständiger Name der Controller-Klasse|
 |method| |_string_|Name der Controller-Methode|
 |request|get, post,delete ['get','post','delete'] |_string / array_|erlaubte Request-Methode(n)|
