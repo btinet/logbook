@@ -3,12 +3,13 @@
 namespace App\Controller;
 
 use App\AbstractController;
+use ReflectionException;
 
 class AppController extends AbstractController
 {
 
     /**
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function index(): void
     {
