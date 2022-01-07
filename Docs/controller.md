@@ -167,6 +167,7 @@ verfügt. Falls ja, wird **true** zurückgegeben, andernfalls wird
 der Benutzer mit einer Warnung ausgeloggt.
 
 ```php
+#src/AbstractController.php (Auszug)
 /**
      * @throws ReflectionException
      */
