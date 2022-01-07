@@ -96,7 +96,7 @@ class PrintController {
 ```
 
 Innerhalb der Klassen werden Funktionen definiert, sogenannte **Methoden**.
-Diese beinhalten die Kontrollstrukturen. Der BasisController dieser Anwendung
+Diese beinhalten die Kontrollstrukturen. Der Basiscontroller dieser Anwendung
 sieht folgendermaßen aus:
 
 ```php
@@ -140,3 +140,50 @@ class AppController extends AbstractController
 }
 
 ```
+
+Das Framework bietet eine optionale abstrakte Controller-Klasse an,
+um allgemeine Aufgaben bereitzustellen. Dazu zählt zum Beispiel eine
+Zugriffssteuerung.
+
+Mehr über die [abstrakte Controller-Klasse](controller.md).
+
+Wird die Methode **index** aufgerufen, wird zunächst geprüft,
+ob eine gültige User-Session existiert. `` $this->denyUnlessGranted('ROLE_USER'); ``
+
+Ist dies nicht der Fall, wird der Benutzer zum Login-Gate weitergeleitet.
+Sollte jedoch eine gültige User-Session existieren, wird im zweiten
+Schritt geprüft, ob der Benutzer über die angegebene Benutzerrolle
+verfügt. Falls ja, wird **true** zurückgegeben, andernfalls wird
+der Benutzer mit einer Warnung ausgeloggt.
+
+```php
+/**
+     * @throws ReflectionException
+     */
+    public function denyUnlessGranted(string $role = null): bool
+    {
+        if(!$user = $this->getUser()){
+            $this->setFlash(400,'warning');
+            $this->redirect(302,'login');
+        }
+
+        $userRole = $user['roles'];
+
+        if($role && !in_array($role,json_decode($userRole))){
+            $this->setFlash(401,'danger');
+            $this->redirect(302,'logout');
+        }
+        return true;
+    }
+
+```
+
+Ist der Benutzer eingeloggt und verfügt über die richtige Benutzer-Rolle,
+wird er zum **TaskController** weitergeleitet. Dieser hält Methoden zur
+Task-Verwaltung bereit.
+
+Die anderen beiden Methoden **imprint** und **tos** geben jeweils eine
+statische Seite für das Impressum und die Terms of Service aus.
+
+Der Controller steuert also konkret, was unter welchen Bedingungen ausgeben
+oder aber auch gespeichert und weiterverarbeitet wird.
