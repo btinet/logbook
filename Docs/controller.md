@@ -1,6 +1,13 @@
 # Controller
 
 1. [Zweck und Funktion](#zweck-und-funktion)
+2. [Aufbau einer PHP-Klasse](#aufbau-einer-php-klasse)
+   1. [Namespace](#namespace)
+   2. [Klasse](#klasse)
+   3. [Methoden](#methoden)
+3. [Abstrakte Controller-Klasse](#abstrakte-controller-klasse)
+   1. [Zugriffssteuerung](#zugriffssteuerung)
+   2. [Bedingte Weiterleitung](#bedingte-weiterleitung)
 
 
 ## Zweck und Funktion
@@ -30,12 +37,13 @@ class AppController {
 }
 
 ```
-
+## Aufbau einer PHP-Klasse
 Die php-Klasse besteht aus drei Basiselementen:
 1. namespace
 2. class
 3. function
 
+### Namespace
 Der **namespace** gibt an, wo sich die .php-Datei befindet. Der Namespace
 ist außerdem hilfreich, wenn es mehrere .php-Dateien mit gleichem Namen gibt.
 
@@ -62,6 +70,7 @@ class AppController {
 Mithilfe des Namespace weiß das Programm, in welchem Ordner es nach der
 angeforderten Datei suchen muss.
 
+### Klasse
 Mit **class{}** definieren wir eine Klasse. Alles, was sich innerhalb
 der Klammern befindet, gehört zu dieser Klasse. Denn es ist ebenfalls möglich,
 mehrere Klassen in einer Datei zusammenzufassen:
@@ -94,7 +103,7 @@ class PrintController {
 }
 
 ```
-
+### Methoden
 Innerhalb der Klassen werden Funktionen definiert, sogenannte **Methoden**.
 Diese beinhalten die Kontrollstrukturen. Der Basiscontroller dieser Anwendung
 sieht folgendermaßen aus:
@@ -140,13 +149,14 @@ class AppController extends AbstractController
 }
 
 ```
-
+## Abstrakte Controller-Klasse
 Das Framework bietet eine optionale abstrakte Controller-Klasse an,
 um allgemeine Aufgaben bereitzustellen. Dazu zählt zum Beispiel eine
 Zugriffssteuerung.
 
 Mehr über die [abstrakte Controller-Klasse](controller.md).
 
+### Zugriffssteuerung
 Wird die Methode **index** aufgerufen, wird zunächst geprüft,
 ob eine gültige User-Session existiert. `` $this->denyUnlessGranted('ROLE_USER'); ``
 
@@ -177,7 +187,7 @@ der Benutzer mit einer Warnung ausgeloggt.
     }
 
 ```
-
+### Bedingte Weiterleitung
 Ist der Benutzer eingeloggt und verfügt über die richtige Benutzer-Rolle,
 wird er zum **TaskController** weitergeleitet. Dieser hält Methoden zur
 Task-Verwaltung bereit.
