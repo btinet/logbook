@@ -21,7 +21,7 @@ Datenbank-Entitäten als Arrays an den Controller übergeben.
 3. [Controller](./Docs/controller.md)
 4. View
 5. Model
-6. [Erweiterungen](./Docs/extensions.md)
+6. [Erweiterungen](Docs/extensions.md)
 
 ## Drittanbieter
 - [steampixel/SimplePHPRouter](https://github.com/steampixel/simplePHPRouter)

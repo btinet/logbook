@@ -154,7 +154,7 @@ Das Framework bietet eine optionale abstrakte Controller-Klasse an,
 um allgemeine Aufgaben bereitzustellen. Dazu zählt zum Beispiel eine
 Zugriffssteuerung.
 
-Mehr über die [abstrakte Controller-Klasse](controller.md).
+Mehr über die [abstrakte Controller-Klasse](extensions.md).
 
 ### Zugriffssteuerung
 Wird die Methode **index** aufgerufen, wird zunächst geprüft,
